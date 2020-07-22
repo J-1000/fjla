@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageUploader from 'react-images-upload';
 
-class App extends Component {
+class EditPlace extends Component {
   state = {
     Title: '',
     Description: '',
@@ -84,5 +84,4 @@ class App extends Component {
   }
 }
 
-export default App;
-
+export default EditPlace;
