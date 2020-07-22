@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { Route, Redirect } from 'react-router-dom';
+import Profile from './pages/Profile'
 //import Projects from './components/Projects';
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
@@ -23,8 +24,9 @@ class App extends React.Component {
   render() {
     return (
       <div className='App' >
-        <Navbar user={this.state.user} setUser={this.setUser} />
 
+        <Navbar user={this.state.user} setUser={this.setUser} />
+        <Profile /*data={user}*/ />
         <Route
           exact path='/projects'
           render={props => {
