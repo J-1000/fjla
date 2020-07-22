@@ -1,25 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <nav>
+    <div className='container'>
+         <ul id='nav-mobile' className='right
+          hide-on-med-and-down'>
+            <li><a href='/'>Home</a></li>
+            <li><a href='/profil'>Profil</a></li>
+         </ul>
+      </div>
+    </nav>
+
   );
 }
 
