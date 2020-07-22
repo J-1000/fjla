@@ -1,19 +1,20 @@
-import React from 'react';
-import 'materialize-css/dist/css/materialize.min.css';
-import './App.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
+import ToolNavbar from "./components/Navbar";
 
 function App() {
   return (
-    <nav>
-    <div className='container'>
-         <ul id='nav-mobile' className='right
-          hide-on-med-and-down'>
-            <li><a href='/'>Home</a></li>
-            <li><a href='/profil'>Profil</a></li>
-         </ul>
+    <div className="homeApp">
+      <nav>
+        <ToolNavbar />
+      </nav>
+      <div className="searchBar">
+    <div>
+        <input className="inputProfil" type="text" placeholder="Search..." />
       </div>
-    </nav>
-
+      </div>
+    </div>
   );
 }
 

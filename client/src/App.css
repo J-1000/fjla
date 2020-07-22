@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.searchBar { 
+  /* width: 50%; */
+  position: relative;
+  left:39%;
+  top: 20vh;
+}
+
+.inputProfil{
+  border-radius: 30px;
+  background-color: white;
+  width: 427px;
+  height: 39px;
+  border: 1px solid #ccc;
+  
+}
+
+
+.inputProfil:hover{
+  -webkit-box-shadow: 1px 1px 1px 1px;
+}
