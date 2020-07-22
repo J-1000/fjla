@@ -70,7 +70,7 @@ router.delete("/logout", (req, res) => {
 });
 
 // returns the logged in user 
-// Hallo mein name ist rom 
+
 router.get("/loggedin", (req, res) => {
   res.json(req.user);
 });
