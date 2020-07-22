@@ -8,7 +8,7 @@ import Profile from './pages/Profile'
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
 //import TaskDetails from './components/TaskDetails';
-import Signup from './components/Signup';
+import Signup from './components/SignUp';
 
 class App extends React.Component {
 
@@ -41,10 +41,11 @@ class App extends React.Component {
 
 
         <Profile /*data={user}*/ />
-        <Route
+        {/* <Route
           exact path='/projects'
           render={props => {
-            if (this.state.user) return <Projects {...props}/>
+            if (this.state.user) 
+            return <Projects {...props}/>
             else return <Redirect to='/' />
           }}
         />
@@ -55,7 +56,7 @@ class App extends React.Component {
         <Route
           exact path='/tasks/:id'
           component={TaskDetails}
-        />
+        /> */}
         <Route
           exact
           path='/signup'
