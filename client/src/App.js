@@ -1,3 +1,4 @@
+import ToolNavbar from "./components/Navbar";
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -25,7 +26,20 @@ class App extends React.Component {
     return (
       <div className='App' >
 
-        <Navbar user={this.state.user} setUser={this.setUser} />
+       
+
+    <div className="homeApp">
+      <nav>
+        <ToolNavbar />
+      </nav>
+      <div className="searchBar">
+    <div>
+        <input className="inputProfil" type="text" placeholder="Search..." />
+      </div>
+      </div>
+    </div>
+
+
         <Profile /*data={user}*/ />
         <Route
           exact path='/projects'
@@ -56,6 +70,7 @@ class App extends React.Component {
       </div>
     );
   }
+
 }
 
 export default App;
