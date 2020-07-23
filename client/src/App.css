@@ -20,10 +20,6 @@
   top: 20vh;
 }
 
-input.searchBar:focus {
-  outline-width: 0;
-}
-
 .inputProfil{
   border-radius: 30px;
   background-color: white;

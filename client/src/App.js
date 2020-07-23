@@ -1,4 +1,4 @@
-import ToolNavbar from "./components/NavbarLoggedOut";
+import ToolNavbar from "./components/ToolNavbar";
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -34,11 +34,9 @@ class App extends React.Component {
     <div className="homeApp">
       <nav>
 
-       <ToolNavbar />
+       <ToolNavbar user={this.state.user} setUser={this.setUser}/>
       </nav>
-      <div className="searchBar">
-        <Search/>
-      </div>
+
         
           <Route
             exact
@@ -58,6 +56,11 @@ class App extends React.Component {
 
         
         
+          <Route 
+            exact
+            path='/'
+            render={props => <div className="searchBar"> <Search /> </div> }
+          />
 
       </div>
     );

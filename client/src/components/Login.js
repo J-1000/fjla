@@ -32,8 +32,9 @@ export default class Login extends Component {
       } else {
         // successfully logged in
         // update the state for the parent component
+        console.log(data)
         this.props.setUser(data);
-        this.props.history.push('/projects');
+        this.props.history.push('/myprofile');
       }
     });
   };
