@@ -2,10 +2,12 @@ import ToolNavbar from "./components/NavbarLoggedOut";
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import Search from './components/Search'
 // import { Route, Redirect } from 'react-router-dom';
 import Profile from './pages/Profile'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import EditPlace from './components/EditPlace'
+
 
 import Signup from './components/SignUp';
 // import Projects from './components/Projects';
@@ -27,9 +29,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="homeApp">
-        <nav>
 
+    <div className="homeApp">
+      <nav>
+
+       <ToolNavbar />
+      </nav>
+      <div className="searchBar">
+        <Search/>
+      </div>
         
           <Route
             exact
@@ -48,6 +56,7 @@ class App extends React.Component {
             <input className="inputProfil" type="text" placeholder="Search..." />
           </div>
         </div>
+
       </div>
     );
   }
