@@ -7,7 +7,7 @@ import Profile from './pages/Profile'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import EditPlace from './components/EditPlace'
 
-// import Signup from './components/SignUp';
+import Signup from './components/SignUp';
 // import Projects from './components/Projects';
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
@@ -30,10 +30,16 @@ class App extends React.Component {
       <div className="homeApp">
         <nav>
 
+        
           <Route
             exact
             path="/myprofile"
             render={props => <Profile {...props} setUser={this.setUser} />}
+          />
+          <Route
+            exact
+            path='/signup'
+            render={props => <Signup setUser={this.setUser} {...props} />}
           />
 
         </nav>
@@ -43,9 +49,6 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-
-
-
     );
   }
 

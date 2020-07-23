@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const signup = (username, password) => {
+  console.log("auth route")
   return axios
     .post("/api/auth/signup", { username, password })
     .then((response) => {
