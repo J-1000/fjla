@@ -7,7 +7,7 @@ const Profile = (props) => {
   //console.log(props.data.email);
   return (
       <div>
-          <ToolNavbar/>
+          
           <h1> My Profile </h1>
           <EditPlace/>
           

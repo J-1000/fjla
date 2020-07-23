@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { signup } from '../pages/auth/auth';
+import { login } from '../pages/auth/auth';
 
-export default class Signup extends Component {
+export default class Login extends Component {
   state = {
     username: '',
     password: '',
@@ -19,10 +19,10 @@ export default class Signup extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log("here")
+
     const { username, password } = this.state;
 
-    signup(username, password).then(data => {
+    login(username, password).then(data => {
       if (data.message) {
         this.setState({
           message: data.message,
@@ -30,8 +30,10 @@ export default class Signup extends Component {
           password: ''
         });
       } else {
+        // successfully logged in
+        // update the state for the parent component
         this.props.setUser(data);
-        this.props.history.push('/myprofile');
+        this.props.history.push('/projects');
       }
     });
   };
@@ -39,8 +41,7 @@ export default class Signup extends Component {
   render() {
     return (
       <>
-       
-        <h2>Signup</h2>
+        <h2>Login</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label htmlFor='username'>Username: </Form.Label>
@@ -65,7 +66,7 @@ export default class Signup extends Component {
           {this.state.message && (
             <Alert variant='danger'>{this.state.message}</Alert>
           )}
-          <Button type='submit'>Signup</Button>
+          <Button type='submit'>Login</Button>
         </Form>
       </>
     );
