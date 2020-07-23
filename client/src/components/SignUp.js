@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { signup } from '../pages/auth/auth';
+import ToolNavbar from './NavbarLoggedOut'
 
 export default class Signup extends Component {
   state = {
@@ -39,6 +40,7 @@ export default class Signup extends Component {
   render() {
     return (
       <>
+        <ToolNavbar/>
         <h2>Signup</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>

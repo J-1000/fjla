@@ -1,4 +1,4 @@
-import ToolNavbar from "./components/Navbar";
+import ToolNavbar from "./components/NavbarLoggedOut";
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -15,7 +15,6 @@ import Signup from './components/SignUp';
 //import ProjectDetails from './components/ProjectDetails';
 //import TaskDetails from './components/TaskDetails';
 
-
 class App extends React.Component {
 
   state = {
@@ -30,23 +29,28 @@ class App extends React.Component {
 
   render() {
     return (
-    <div className="homeApp">
-      <nav>
+      <div className="homeApp">
+        <nav>
 
-       <ToolNavbar />
-      </nav>
-      <div className="searchBar">
-        <Search/>
+        
+          <Route
+            exact
+            path="/myprofile"
+            render={props => <Profile {...props} setUser={this.setUser} />}
+          />
+          <Route
+            exact
+            path='/signup'
+            render={props => <Signup setUser={this.setUser} {...props} />}
+          />
+
+        </nav>
+        <div className="searchBar">
+          <div>
+            <input className="inputProfil" type="text" placeholder="Search..." />
+          </div>
+        </div>
       </div>
-      <Route
-      exact
-      path='/signup'
-      render={props => <Signup setUser={this.setUser} {...props} />}
-      />
-    </div>
-
-    
-      
     );
   }
 
