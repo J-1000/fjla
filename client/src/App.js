@@ -2,10 +2,12 @@ import ToolNavbar from "./components/Navbar";
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import Search from './components/Search'
 // import { Route, Redirect } from 'react-router-dom';
 import Profile from './pages/Profile'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import EditPlace from './components/EditPlace'
+
 
 import Signup from './components/SignUp';
 // import Projects from './components/Projects';
@@ -34,9 +36,7 @@ class App extends React.Component {
        <ToolNavbar />
       </nav>
       <div className="searchBar">
-    <div>
-       <input className="inputProfil" type="text" placeholder="Search..." />
-      </div>
+        <Search/>
       </div>
       <Route
       exact
