@@ -25,6 +25,29 @@ class EditPlace extends Component {
     })
   }
 
+  handleTitleChange = event => {
+    this.setState({
+      title: event.target.value 
+    })
+  }
+
+  handleDescriptionChange = event => {
+    this.setState({
+      director: event.target.value
+    })
+  }
+
+  handleChange = event => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.type;
+    this.setState({
+      [name]: value 
+    }) 
+  }
+ 
+ 
+ 
   handleSubmit = event => {
     event.preventDefault();
     const { title, description } = this.state;
