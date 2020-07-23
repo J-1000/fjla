@@ -2,7 +2,7 @@ import axios from "axios";
 
 const signup = (username, password) => {
   return axios
-    .post("/api/auth/signup", { username, password })
+    .post("/routes/auth.js", { username, password })
     .then((response) => {
       return response.data;
     })
