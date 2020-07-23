@@ -5,7 +5,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 function ToolNavbar (props) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Navbar.Brand href="/">MyTent</Navbar.Brand>
+    <Navbar.Brand href="#home">MyTent</Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="mr-auto">
@@ -24,9 +24,10 @@ function ToolNavbar (props) {
         </NavDropdown>
       </Nav>
       <Nav>
-        <Nav.Link href="#deets">Profil</Nav.Link>
-        <Nav.Link href="/signup">Sign Up</Nav.Link>
-        <Nav.Link eventKey={2} href="#memes"> LogIn </Nav.Link>
+        <Nav.Link href="#deets"> My Profile</Nav.Link>
+        <Nav.Link eventKey={2} href="#memes">
+          LogOut
+        </Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
