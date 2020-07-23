@@ -10,6 +10,7 @@ import EditPlace from './components/EditPlace'
 
 
 import Signup from './components/SignUp';
+import Login from './components/Login';
 // import Projects from './components/Projects';
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
@@ -33,7 +34,7 @@ class App extends React.Component {
     <div className="homeApp">
       <nav>
 
-       <ToolNavbar />
+       <ToolNavbar user={this.state.user} setUser={this.setUser}/>
       </nav>
 
         
@@ -47,6 +48,14 @@ class App extends React.Component {
             path='/signup'
             render={props => <Signup setUser={this.setUser} {...props} />}
           />
+          <Route
+          exact
+          path='/login'
+          render={props => <Login setUser={this.setUser} {...props} />}
+        />
+
+        
+        
           <Route 
             exact
             path='/'
