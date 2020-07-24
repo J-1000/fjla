@@ -17,6 +17,7 @@ export default class MapBox extends Component {
 
   render() {
     return (
+
       <div>
       <div ref={el => this.mapContainer = el} className="mapContainer"/>
       </div>

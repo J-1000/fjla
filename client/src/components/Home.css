@@ -1,0 +1,9 @@
+.mapBoxHome{
+  width: 10px;
+  height:10px;
+}
+
+.parentContainerHome{
+  display: flex;
+  flex-direction: column;
+}
