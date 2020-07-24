@@ -7,7 +7,8 @@ class EditPlace extends Component {
     title: '',
     description: '',
     photo: '',
-    userPhoto: '',
+    userPhoto: this.props.user.photo,
+    userPhotoURL: "",
     uploadOn: true,
     uploadOn2: true
   }
@@ -69,8 +70,10 @@ class EditPlace extends Component {
     .post("/api/auth/uploadImage", uploadData)
     .then(response => {
       console.log(response)
-      this.setState({userPhoto: response.data,
-        uploadOn: false})
+      this.setState({
+        uploadOn: false,
+        userPhotoURL: response.data
+      })
     })
     .catch(err => console.log("Error while uploading the file", err)) 
   } 
@@ -104,21 +107,34 @@ class EditPlace extends Component {
 
   handleSubmitUserProfile = event => {
     event.preventDefault();
-    console.log(this.state.userPhoto)
+    console.log(this.state.userPhotoURL)
     axios
-    .post("/api/auth/profilePicture", {photo: this.state.userPhoto})
+    .post("/api/auth/profilePicture", {photo: this.state.userPhotoURL})
     .then((response) => {
-      console.log(response.data);
+      console.log(response.data.photo);
+      this.props.setUser(response.data);
+      this.setState({
+        userPhoto: response.data.photo
+      })
     })
     .catch((err) => {
       return err.response.data;
     });
   }
 
+  componentDidUpdate(_, prevState) {
+    if (prevState.userPhoto !== this.state.userPhoto) {
+      this.render()
+    }
+  }
+
   render() {
     console.log(this.state)
+    console.log(this.props, "PROPS")
+
     return (
       <div className='Form'>
+        <img className= "profileimg" src={this.state.userPhoto} /> 
         <form encType="multipart/form-data"  onSubmit={this.handleSubmitUserProfile}>
         <h2>Add a your profile picture!</h2> 
         <input type="file" name="photo" onChange={this.handleFileUploadProfile}></input>

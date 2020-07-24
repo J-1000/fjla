@@ -23,6 +23,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log(this.state.user)
     return (
       <div className="homeApp" style={{height:"100vh"}}>
         <nav>
@@ -32,18 +33,18 @@ class App extends React.Component {
           <Route
             exact
             path="/myprofile"
-            render={props => <Profile {...props} setUser={this.setUser} />}
+            render={props => <Profile {...props} setUser={this.setUser} user={this.state.user} />}
           />
           <Route
             exact
             path='/signup'
             render={props => <Signup setUser={this.setUser} {...props} />}
           />
-          <Route
+          {/* <Route
           exact
           path="/myprofile"
           render={(props) => <Profile {...props} setUser={this.setUser} />}
-        />
+        /> */}
         <Route
           exact
           path="/signup"
