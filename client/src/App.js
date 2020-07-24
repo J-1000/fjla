@@ -3,6 +3,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import Search from "./components/Search";
+import HoverRating from './components/Rating';
 // import { Route, Redirect } from 'react-router-dom';
 import Profile from "./pages/Profile";
 import { Route } from "react-router-dom";
@@ -63,6 +64,7 @@ class App extends React.Component {
             <div className="searchBar-inner">
             <Search />
               <Slider className="sliderComponent slide" />
+              <HoverRating />
             </div>
              
               
