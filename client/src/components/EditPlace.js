@@ -6,8 +6,10 @@ class EditPlace extends Component {
   state = {
     title: '',
     description: '',
-    photo: ''
-    
+    photo: '',
+    userPhoto: '',
+    uploadOn: true,
+    uploadOn2: true
   }
 
   // constructor(props) {
@@ -42,19 +44,39 @@ class EditPlace extends Component {
     const uploadData = new FormData();
     uploadData.append("imagePath", event.target.files[0]);
     
-    this.setState({uploadOn: true});
+    this.setState({uploadOn2: true});
 
     axios
     .post("/api/places/uploadImage", uploadData)
     .then(response => {
       console.log(response)
-      this.setState({photo: response.data})
+      this.setState({
+        photo: response.data,
+        uploadOn2: false
+      })
     })
     .catch(err => console.log("Error while uploading the file", err)) 
-    
+  } 
 
+  // this should be for the profile picture
+  handleFileUploadProfile = event => {
+    const uploadData = new FormData();
+    uploadData.append("imagePath", event.target.files[0]);
+    
+    this.setState({uploadOn: true});
+
+    axios
+    .post("/api/auth/uploadImage", uploadData)
+    .then(response => {
+      console.log(response)
+      this.setState({userPhoto: response.data,
+        uploadOn: false})
+    })
+    .catch(err => console.log("Error while uploading the file", err)) 
   } 
  
+  // what is missing?
+
   handleSubmit = event => {
     event.preventDefault();
     console.log("banana")
@@ -80,12 +102,33 @@ class EditPlace extends Component {
     // }))
   }
 
+  handleSubmitUserProfile = event => {
+    event.preventDefault();
+    console.log(this.state.userPhoto)
+    axios
+    .post("/api/auth/profilePicture", {photo: this.state.userPhoto})
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  }
+
   render() {
     console.log(this.state)
     return (
       <div className='Form'>
+        <form encType="multipart/form-data"  onSubmit={this.handleSubmitUserProfile}>
+        <h2>Add a your profile picture!</h2> 
+        <input type="file" name="photo" onChange={this.handleFileUploadProfile}></input>
+        <br></br>
+        <br></br>
+        {this.state.uploadOn ? <button disabled type='submit'> Add a your profile picture </button> : <button type='submit'> Add a your profile picture </button>}
+        </form>
+
         <h2> Add a new place for Camping!</h2>
-        <form enctype="multipart/form-data"  onSubmit={this.handleSubmit}>
+        <form encType="multipart/form-data"  onSubmit={this.handleSubmit}>
 
           <label htmlFor='title'> Title: </label>
           <input
@@ -105,6 +148,7 @@ class EditPlace extends Component {
             value={this.state.description}
             onChange={this.handleChange}
           />
+          
           <input type="file" name="photo" onChange={this.handleFileUpload}></input>
        {/*    <ImageUploader
           withIcon={true}
@@ -117,7 +161,8 @@ class EditPlace extends Component {
 
           <br></br>
           <br></br>
-          <button type='submit' onClick={this.handleSubmit}> Add a place </button>
+          {this.state.uploadOn2 ? <button disabled type='submit'> Add a Place </button> : <button type='submit'> Add a Place </button>}
+
         </form>
 
         

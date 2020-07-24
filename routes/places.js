@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Place = require("../models/Place");
-const uploadCloud = require("../configs/cloudinary");
+const {uploadCloud} = require("../configs/cloudinary");
 
 router.get('/', (req, res) => {
   Place.find().then(places => {
@@ -24,4 +24,5 @@ router.post("/uploadImage",uploadCloud.single("imagePath"),(req,res)=>{
   console.log(req.file)
   res.json(req.file.url)
 })
+
 module.exports = router;
