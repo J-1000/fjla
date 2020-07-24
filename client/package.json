@@ -15,6 +15,7 @@
     "react-coverflow": "^0.2.20",
     "react-dom": "^16.13.1",
     "react-images-upload": "^1.2.8",
+    "react-map-gl": "^5.2.7",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -42,8 +43,4 @@
       "last 1 safari version"
     ]
   }
-  
 }
-
-
-
