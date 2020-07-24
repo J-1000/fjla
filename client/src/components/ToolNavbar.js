@@ -35,6 +35,7 @@ function ToolNavbar (props) {
       <Nav>
       {props.user ? (
         <>
+        <h4 style={{ color: '0000' }}>Welcome {props.user.username} </h4>
         <Nav.Link href="/myprofile">Profil</Nav.Link>
         <Nav.Link to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
 
@@ -42,9 +43,11 @@ function ToolNavbar (props) {
         ) : (
         <>
         <Nav.Link href="/signup">Sign Up</Nav.Link>
+
         <Nav.Link eventKey={2} href="/login"> LogIn </Nav.Link>
         </>
         )}
+
       </Nav>
     </Navbar.Collapse>
   </Navbar>

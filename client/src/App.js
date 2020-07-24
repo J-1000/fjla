@@ -28,9 +28,18 @@ class App extends React.Component {
         <nav>
           <ToolNavbar className="Nav ToolNavbar" user={this.state.user} setUser={this.setUser} />
         </nav>
-
-        <div> {this.state.user && this.state.user.username} </div>
-        <Route
+     
+          <Route
+            exact
+            path="/myprofile"
+            render={props => <Profile {...props} setUser={this.setUser} />}
+          />
+          <Route
+            exact
+            path='/signup'
+            render={props => <Signup setUser={this.setUser} {...props} />}
+          />
+          <Route
           exact
           path="/myprofile"
           render={(props) => <Profile {...props} setUser={this.setUser} />}
