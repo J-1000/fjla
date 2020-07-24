@@ -9,12 +9,20 @@ router.get('/', (req, res) => {
   }).catch(err => console.log(err))
 });
 
+router.get('/userPlaces', (req, res) => {
+  console.log(req.user._id, "ID")
+  Place.find({userId: req.user._id}).then(userPlaces => {
+    console.log(userPlaces)
+    res.json(userPlaces)
+  }).catch(err => console.log(err))
+});
+
  router.post('/new',uploadCloud.single("photo"), (req, res) => { 
   console.log("llamando?")
   const {title, description} = req.body;
   const imgPath=req.body.photo
   
-  Place.create({name: title, description, imgPath}).then(newPlace => {
+  Place.create({name: title, description, imgPath, userId: req.user._id}).then(newPlace => {
     console.log(newPlace, "newPlace")
     res.json(newPlace)
   }).catch(err => console.log(err))
