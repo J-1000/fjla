@@ -26,7 +26,7 @@ function ToolNavbar (props) {
       <Nav>
         <Nav.Link href="#deets">Profil</Nav.Link>
         <Nav.Link href="/signup">Sign Up</Nav.Link>
-        <Nav.Link eventKey={2} href="#memes"> LogIn </Nav.Link>
+        <Nav.Link eventKey={2} href="/"> LogIn </Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
