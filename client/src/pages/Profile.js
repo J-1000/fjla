@@ -4,11 +4,12 @@ import ToolNavbar from '../components/ToolNavbar'
 
 
 
+
 const Profile = (props) => {
   //console.log(props.data.email);
   return (
       <div>
-          <h1> My Profile </h1>
+          <h1> My Profile</h1>
           <EditPlace/>
       </div>
   )
