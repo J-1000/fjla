@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import ImageUploader from 'react-images-upload';
+import axios from 'axios';
 
 class EditPlace extends Component {
   state = {
-    Title: '',
-    Description: '',
+    title: '',
+    description: '',
+    photo: ''
+    
   }
 
-  constructor(props) {
-    super(props);
-    this.state = { pictures: [] };
-    this.onDrop = this.onDrop.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { pictures: [] };
+  //   this.onDrop = this.onDrop.bind(this);
+  // }
 
-  onDrop(picture) {
+  onDrop=(picture)=> {
     this.setState({
-      pictures: this.state.pictures.concat(picture),
+      photo: this.state.photo.concat(picture),
     });
   }
   addPlace = () => {
@@ -25,48 +28,64 @@ class EditPlace extends Component {
     })
   }
 
-  handleTitleChange = event => {
-    this.setState({
-      title: event.target.value 
-    })
-  }
-
-  handleDescriptionChange = event => {
-    this.setState({
-      director: event.target.value
-    })
-  }
-
   handleChange = event => {
     const target = event.target;
     const name = target.name;
-    const value = target.type;
+    const value = target.value;
+    // console.log(name, value, this.state)
     this.setState({
       [name]: value 
     }) 
   }
- 
- 
+
+  handleFileUpload = event => {
+    const uploadData = new FormData();
+    uploadData.append("imagePath", event.target.files[0]);
+    
+    this.setState({uploadOn: true});
+
+    axios
+    .post("/api/places/uploadImage", uploadData)
+    .then(response => {
+      console.log(response)
+      this.setState({photo: response.data})
+    })
+    .catch(err => console.log("Error while uploading the file", err)) 
+    
+
+  } 
  
   handleSubmit = event => {
     event.preventDefault();
-    const { title, description } = this.state;
+    console.log("banana")
+    const { title, description,photo } = this.state;
     const newPlace = {
       title,
-      description
+      description,
+      photo
     }
-    console.log(newPlace)
-    this.setState((state, props) => ({
-      places: [newPlace, ...state.places],
-      title: '',
-      description: '',
-    }))
+    // console.log(newPlace)
+    axios
+    .post("/api/places/new", newPlace)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+    // this.setState((state, props) => ({
+    //   places: [newPlace, ...state.places],
+    //   title: '',
+    //   description: '',
+    // }))
   }
+
   render() {
+    console.log(this.state)
     return (
       <div className='Form'>
         <h2> Add a new place for Camping!</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form enctype="multipart/form-data"  onSubmit={this.handleSubmit}>
 
           <label htmlFor='title'> Title: </label>
           <input
@@ -74,6 +93,7 @@ class EditPlace extends Component {
             name='title'
             id='title'
             value={this.state.title}
+            onChange={this.handleChange}
           />
           
 
@@ -83,22 +103,24 @@ class EditPlace extends Component {
             name='description'
             id='description'
             value={this.state.description}
+            onChange={this.handleChange}
           />
-          
-          <br></br>
-          <br></br>
-
-          <button type='submit'> Add a place </button>
-        </form>
-
-        <ImageUploader
+          <input type="file" name="photo" onChange={this.handleFileUpload}></input>
+       {/*    <ImageUploader
           withIcon={true}
+          name="photo"
           buttonText='Choose images'
           onChange={this.onDrop}
           imgExtension={['.jpg', '.gif', '.png', '.gif']}
           maxFileSize={5242880}
-        />
+        /> */}
 
+          <br></br>
+          <br></br>
+          <button type='submit' onClick={this.handleSubmit}> Add a place </button>
+        </form>
+
+        
 
         <h1> All my created places </h1>
         List with all the places I created.

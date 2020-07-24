@@ -50,7 +50,6 @@ class App extends React.Component {
             render={props => <Signup setUser={this.setUser} {...props} />}
           />
 
-        </nav>
         <div className="searchBar">
           <div>
             <input className="inputProfil" type="text" placeholder="Search..." />

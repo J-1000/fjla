@@ -40,7 +40,7 @@ export default class Signup extends Component {
   render() {
     return (
       <>
-        <ToolNavbar/>
+        
         <h2>Signup</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
