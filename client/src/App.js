@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import EditPlace from './components/EditPlace'
 
 
+
 import Signup from './components/SignUp';
 import Login from './components/Login';
 // import Projects from './components/Projects';
@@ -34,10 +35,11 @@ class App extends React.Component {
     <div className="homeApp">
       <nav>
 
+
        <ToolNavbar user={this.state.user} setUser={this.setUser}/>
       </nav>
-
-        
+     
+      <div> Hello {this.state.user && this.state.user.username} </div>
           <Route
             exact
             path="/myprofile"
@@ -59,7 +61,8 @@ class App extends React.Component {
           <Route 
             exact
             path='/'
-            render={props => <div className="searchBar"> <Search /> </div> }
+            render={props => <div className="searchBar"> <Search />   </div>
+           }
           />
 
       </div>

@@ -43,9 +43,11 @@ function ToolNavbar (props) {
         ) : (
         <>
         <Nav.Link href="/signup">Sign Up</Nav.Link>
+
         <Nav.Link eventKey={2} href="/login"> LogIn </Nav.Link>
         </>
         )}
+
       </Nav>
     </Navbar.Collapse>
   </Navbar>
