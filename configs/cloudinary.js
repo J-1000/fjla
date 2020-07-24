@@ -24,6 +24,19 @@ const storage = storage_multer({
 
 });
 
+//storage for profile pictures // is this needed? // already made a cloudinary folder
+const storage2 = storage_multer({
+  cloudinary: cloudinary,
+  folder: "profile_pictures",
+  allowedFormats: ["jpeg", "png"],
+  filename: (req, file, cb) => {
+    cb(null, trimExtension(file.originalname));
+  }
+
+});
+
 const uploadCloud= multer({storage:storage});
 
-module.exports = uploadCloud;
+const uploadCloud2= multer({storage:storage2}); // do I need this?
+
+module.exports = {uploadCloud, uploadCloud2};
