@@ -10,9 +10,9 @@ const Search = (props) => {
     }
 
     return (
-        <div>
+        <>
         <input className="inputProfil" type="text" onInput={handleNameChange} value={name}></input>
-       </div>
+       </>
     );
 
 }

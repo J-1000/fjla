@@ -31,7 +31,7 @@ export default class Signup extends Component {
         });
       } else {
         this.props.setUser(data);
-        this.props.history.push('/projects');
+        this.props.history.push('/myprofile');
       }
     });
   };
@@ -39,6 +39,7 @@ export default class Signup extends Component {
   render() {
     return (
       <>
+       
         <h2>Signup</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>

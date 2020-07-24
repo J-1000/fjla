@@ -1,8 +1,17 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import {logout} from '../pages/auth/auth'
+
+const handleLogout = props => {
+  console.log(props)
+  logout().then(() => {
+    props.setUser(null);
+  });
+}
 
 
 function ToolNavbar (props) {
+  console.log(props.user);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Navbar.Brand href="/">MyTent</Navbar.Brand>
@@ -24,9 +33,18 @@ function ToolNavbar (props) {
         </NavDropdown>
       </Nav>
       <Nav>
-        <Nav.Link href="#deets">Profil</Nav.Link>
+      {props.user ? (
+        <>
+        <Nav.Link href="/myprofile">Profil</Nav.Link>
+        <Nav.Link to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
+
+        </>
+        ) : (
+        <>
         <Nav.Link href="/signup">Sign Up</Nav.Link>
-        <Nav.Link eventKey={2} href="/"> LogIn </Nav.Link>
+        <Nav.Link eventKey={2} href="/login"> LogIn </Nav.Link>
+        </>
+        )}
       </Nav>
     </Navbar.Collapse>
   </Navbar>
