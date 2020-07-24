@@ -4,9 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Search from './components/Search'
 // import { Route, Redirect } from 'react-router-dom';
-import Profile from './pages/Profile'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import EditPlace from './components/EditPlace'
+import Profile from './pages/Profile';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import EditPlace from './components/EditPlace';
+import MapBox from './components/MapBox';
+import "./components/MapBox.css"
 
 
 
@@ -64,6 +66,7 @@ class App extends React.Component {
             render={props => <div className="searchBar"> <Search />   </div>
            }
           />
+         
 
       </div>
     );
