@@ -1,6 +1,6 @@
 import React from 'react'
 import EditPlace from '../components/EditPlace'
-import ToolNavbar from '../components/ToolNavbar'
+
 
 
 
