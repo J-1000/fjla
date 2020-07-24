@@ -1,4 +1,4 @@
-import ToolNavbar from "./components/NavbarLoggedOut";
+import ToolNavbar from "./components/ToolNavbar";
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -9,7 +9,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import EditPlace from './components/EditPlace'
 
 
+
 import Signup from './components/SignUp';
+import Login from './components/Login';
 // import Projects from './components/Projects';
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
@@ -33,12 +35,11 @@ class App extends React.Component {
     <div className="homeApp">
       <nav>
 
-       <ToolNavbar />
+
+       <ToolNavbar user={this.state.user} setUser={this.setUser}/>
       </nav>
-      <div className="searchBar">
-        <Search/>
-      </div>
-        
+     
+      <div> Hello {this.state.user && this.state.user.username} </div>
           <Route
             exact
             path="/myprofile"
@@ -49,12 +50,20 @@ class App extends React.Component {
             path='/signup'
             render={props => <Signup setUser={this.setUser} {...props} />}
           />
+          <Route
+          exact
+          path='/login'
+          render={props => <Login setUser={this.setUser} {...props} />}
+        />
 
-        <div className="searchBar">
-          <div>
-            <input className="inputProfil" type="text" placeholder="Search..." />
-          </div>
-        </div>
+        
+        
+          <Route 
+            exact
+            path='/'
+            render={props => <div className="searchBar"> <Search />   </div>
+           }
+          />
 
       </div>
     );
