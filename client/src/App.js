@@ -5,10 +5,19 @@ import "./App.css";
 import Search from "./components/Search";
 // import { Route, Redirect } from 'react-router-dom';
 import Profile from "./pages/Profile";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EditPlace from "./components/EditPlace";
+import MapBox from "./components/MapBox";
+import "./components/MapBox.css";
+import Home from "./components/Home";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
+// import Projects from './components/Projects';
+//import Navbar from './components/Navbar';
+//import ProjectDetails from './components/ProjectDetails';
+//import TaskDetails from './components/TaskDetails';
+import HoverRating from './components/Rating';
+// import { Route, Redirect } from 'react-router-dom';
 import Slider from "./components/Slider";
 
 class App extends React.Component {
@@ -25,9 +34,9 @@ class App extends React.Component {
   render() {
     console.log(this.state.user)
     return (
-      <div className="homeApp" style={{height:"100vh"}}>
+      <div className="homeApp">
         <nav>
-          <ToolNavbar className="Nav ToolNavbar" user={this.state.user} setUser={this.setUser} />
+          <ToolNavbar user={this.state.user} setUser={this.setUser} />
         </nav>
      
           <Route
@@ -64,12 +73,15 @@ class App extends React.Component {
             <div className="searchBar-inner">
             <Search />
               <Slider className="sliderComponent slide" />
+              <HoverRating />
             </div>
              
               
             </div>
           )}
         />
+        <Route exact path="/home" render={(props) => <Home />} />
+      
       </div>
     );
   }
