@@ -13,11 +13,15 @@ import axios from "axios";
 
   ReactDOM.render(
     <BrowserRouter>
-      <App  />
-      {/* user={user} */}
+      <App  
+        // user={user}
+      />
+
     </BrowserRouter>,
     document.getElementById("root")
   );
+
+// })
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
