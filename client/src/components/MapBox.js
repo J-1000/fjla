@@ -18,6 +18,7 @@ export default class MapBox extends Component {
     
     };
     }
+  
 
     componentDidMount() {
     const map = new mapboxgl.Map({
@@ -27,6 +28,13 @@ export default class MapBox extends Component {
     zoom: this.state.viewport.zoom
     });
 
+    var marker = new mapboxgl.Marker()
+        .setLngLat([13.3509, 52.5113])
+        .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+        .addTo(map);
+    
+    
+
     map.on('move', () => {
       this.setState({
       lng: map.getCenter().lng.toFixed(4),
@@ -34,8 +42,33 @@ export default class MapBox extends Component {
       zoom: map.getZoom().toFixed(2)
       });
       });
+   
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true
+        })
+        )
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     }
 
+
+
+
+
+   
     setUserLocation = () => {
       navigator.geolocation.getCurrentPosition(position => {
           let newViewport = {
@@ -48,12 +81,27 @@ export default class MapBox extends Component {
           console.log(position.coords.latitude)
           console.log(position.coords.longitude)
           console.log(newViewport)
-          
+            
+        
+
+
+
+
+
           this.setState({
               viewport: newViewport
           })
       })
+
+
+      
+
+
+
+      
   }
+
+  
 
 
   render() {
@@ -61,6 +109,8 @@ export default class MapBox extends Component {
       
     <>
      <button onClick={this.setUserLocation}>My Location</button> 
+     <button onClick={this.marker}>Add Marker</button> 
+     
     <div ref={el => this.mapContainer = el} className="mapContainer"/>
      
       <div className='sidebarStyle'>
