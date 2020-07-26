@@ -11,9 +11,11 @@ export default class MapBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    lng: 5,
-    lat: 34,
-    zoom: 2
+      viewport: {
+    lng: 13.34,
+    lat: 52.51,
+    zoom: 8} 
+    
     };
     }
 
@@ -21,8 +23,8 @@ export default class MapBox extends Component {
     const map = new mapboxgl.Map({
     container: this.mapContainer,
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [this.state.lng, this.state.lat],
-    zoom: this.state.zoom
+    center: [this.state.viewport.lng, this.state.viewport.lat],
+    zoom: this.state.viewport.zoom
     });
 
     map.on('move', () => {
@@ -34,11 +36,32 @@ export default class MapBox extends Component {
       });
     }
 
+    setUserLocation = () => {
+      navigator.geolocation.getCurrentPosition(position => {
+          let newViewport = {
+              //height: "100vh",
+              //width: "100vw",
+              lng: position.coords.longitude,
+              lat: position.coords.latitude,
+              zoom: 12
+          }
+          console.log(position.coords.latitude)
+          console.log(position.coords.longitude)
+          console.log(newViewport)
+          
+          this.setState({
+              viewport: newViewport
+          })
+      })
+  }
+
+
   render() {
     return (
       
     <>
-      <div ref={el => this.mapContainer = el} className="mapContainer"/>
+     <button onClick={this.setUserLocation}>My Location</button> 
+    <div ref={el => this.mapContainer = el} className="mapContainer"/>
      
       <div className='sidebarStyle'>
       Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "} {this.state.zoom}
