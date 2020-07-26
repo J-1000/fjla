@@ -16,7 +16,7 @@ import Login from "./components/Login";
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
 //import TaskDetails from './components/TaskDetails';
-import HoverRating from './components/Rating';
+import HoverRating from "./components/Rating";
 // import { Route, Redirect } from 'react-router-dom';
 import Slider from "./components/Slider";
 
@@ -32,28 +32,20 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.user)
+    console.log(this.state.user);
     return (
       <div className="homeApp">
         <nav>
           <ToolNavbar user={this.state.user} setUser={this.setUser} />
         </nav>
-     
-          <Route
-            exact
-            path="/myprofile"
-            render={props => <Profile {...props} setUser={this.setUser} user={this.state.user} />}
-          />
-          <Route
-            exact
-            path='/signup'
-            render={props => <Signup setUser={this.setUser} {...props} />}
-          />
-          {/* <Route
+
+        <Route
           exact
           path="/myprofile"
-          render={(props) => <Profile {...props} setUser={this.setUser} />}
-        /> */}
+          render={(props) => (
+            <Profile {...props} setUser={this.setUser} user={this.state.user} />
+          )}
+        />
         <Route
           exact
           path="/signup"
@@ -70,18 +62,15 @@ class App extends React.Component {
           path="/"
           render={(props) => (
             <div className="searchBar">
-            <div className="searchBar-inner">
-            <Search />
-              <Slider className="sliderComponent slide" />
-              <HoverRating />
-            </div>
-             
-              
+              <div className="searchBar-inner">
+                <Search />
+                <Slider className="sliderComponent slide" />
+                <HoverRating />
+              </div>
             </div>
           )}
         />
         <Route exact path="/home" render={(props) => <Home />} />
-      
       </div>
     );
   }
