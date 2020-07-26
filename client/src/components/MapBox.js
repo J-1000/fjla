@@ -16,6 +16,15 @@ export default class MapBox extends Component {
       },
     };
   }
+  // Fake Database to be replaced by data from our database
+  loadFakeplacesfromFakeDB(place) {
+    let markers = [];
+    for (let i =0; i < place; i++) {
+      markers.push([( parseFloat(13) + parseFloat(Math.random().toFixed(4))), ( parseFloat(52) + parseFloat(Math.random().toFixed(4)))])
+    }
+    //console.log(markers);
+    return markers;
+  }
 
   componentDidMount() {
     const map = new mapboxgl.Map({
@@ -24,7 +33,7 @@ export default class MapBox extends Component {
       center: [this.state.viewport.lng, this.state.viewport.lat],
       zoom: this.state.viewport.zoom,
     });
-
+    //sets one marker specific coordinates:
     var marker = new mapboxgl.Marker()
       .setLngLat([13.3509, 52.5113])
       .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
@@ -37,7 +46,7 @@ export default class MapBox extends Component {
         zoom: map.getZoom().toFixed(2),
       });
     });
-
+    //sets marker where I click on the map:
     map.on('click', function(e) {
       let addPlaceMarker = new mapboxgl.Marker()
       .setLngLat([e.lngLat.lng, e.lngLat.lat])
@@ -50,7 +59,7 @@ export default class MapBox extends Component {
       console.log(e.lngLat.lat);
       console.log(e.lngLat.lng);
       });
-
+    // shows the userlocation 
     map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -60,6 +69,17 @@ export default class MapBox extends Component {
       })
     );
 
+   // loads the places fom the fakeplacesDB method on load
+    map.on('load', () => {
+      var markers = this.loadFakeplacesfromFakeDB(20);
+      //console.log(markers);
+      for (let i =0; i < 20; i++) {
+        console.log(markers[i][0]);
+        new mapboxgl.Marker().setLngLat([markers[i][0], markers[i][1]]).addTo(map);
+      }
+
+      });
+    //  other experiment with geojson, example from the docs
     var geojson = {
       type: "FeatureCollection",
       features: [
@@ -117,34 +137,36 @@ export default class MapBox extends Component {
       new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
     });
   }
-
-  setUserLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let newViewport = {
+  // rest of the first try of geolocating the User
+  //setUserLocation = () => {
+    //navigator.geolocation.getCurrentPosition((position) => {
+      //let newViewport = {
         //height: "100vh",
         //width: "100vw",
-        lng: position.coords.longitude,
-        lat: position.coords.latitude,
-        zoom: 12,
-      };
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
-      console.log(newViewport);
+        //lng: position.coords.longitude,
+        //lat: position.coords.latitude,
+        //zoom: 12,
+      //};
+      //console.log(position.coords.latitude);
+      //console.log(position.coords.longitude);
+      //console.log(newViewport);
 
-      this.setState({
-        viewport: newViewport,
-      });
-    });
-  };
+      //this.setState({
+       // viewport: newViewport,
+      //});
+    //});
+  //};
 
   //<button onClick={this.setUserLocation}>My Location</button>
 
   render() {
+    const { lng, lat, zoom } = this.state;
     return (
       <>
-        <button onClick={this.marker}>Add Marker</button>
 
-        <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
+        <div ref={(el) => (this.mapContainer = el)} className="mapContainer"  />
+        
+        //<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
 
         <div className="sidebarStyle">
           Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
