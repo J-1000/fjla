@@ -12,8 +12,10 @@ class EditPlace extends Component {
     userPhotoURL: "",
     uploadOn: true,
     uploadOn2: true,
+
     places: [],
     Likes: 0
+
   }
 
 
