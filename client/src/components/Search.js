@@ -11,7 +11,7 @@ const Search = (props) => {
 
     return (
         <>
-        <input className="inputProfil" type="text" onInput={handleNameChange} value={name}></input>
+        <input className="inputProfil" type="text" onInput={handleNameChange} value={name} ></input>
        </>
     );
 

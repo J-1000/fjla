@@ -29,6 +29,7 @@
     "passport-local": "^1.0.0",
     "react-bootstrap": "^1.2.2",
     "react-coverflow": "^0.2.20",
+    "react-map-gl-geocoder": "^2.0.11",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {

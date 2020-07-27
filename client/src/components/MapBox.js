@@ -2,8 +2,17 @@ import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import "./MapBox.css";
 import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import Search from "./Search";
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXJ0ZWxzaW0iLCJhIjoiY2tjenh5NzFjMG9iNTJ0b3V4emM4azN4cSJ9.ND9UOA3cfWrFtJv2gjojPw';
 
 //var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+
+const geocoder = new MapboxGeocoder({
+  accessToken: mapboxgl.accessToken,
+  mapboxgl: mapboxgl
+});
 
 export default class MapBox extends Component {
   constructor(props) {
@@ -61,6 +70,7 @@ export default class MapBox extends Component {
       console.log("A Pin was placed at " + e.lngLat);
       console.log(e.lngLat.lat);
       console.log(e.lngLat.lng);
+      console.log(e.lngLat);
     });
     // shows the userlocation
     map.addControl(
@@ -71,7 +81,12 @@ export default class MapBox extends Component {
         trackUserLocation: true,
       })
     );
-
+    map.addControl(
+      new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+      })
+      );
     // loads the places fom the fakeplacesDB method on load
     map.on("load", () => {
       var markers = this.loadFakeplacesfromFakeDB(20);
@@ -83,6 +98,9 @@ export default class MapBox extends Component {
           .addTo(map);
       }
     });
+    geocoder.addTo('#geocoder-container');
+    
+
     //  other experiment with geojson, example from the docs
     var geojson = {
       type: "FeatureCollection",
@@ -167,6 +185,7 @@ export default class MapBox extends Component {
     const { lng, lat, zoom } = this.state;
     return (
       <>
+        <div id='geocoder-container'></div>
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
         //<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
         <div className="sidebarStyle">
