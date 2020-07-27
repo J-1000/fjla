@@ -12,7 +12,8 @@ class EditPlace extends Component {
     userPhoto: this.props.user.photo,
     userPhotoURL: "",
     uploadOn: true,
-    uploadOn2: true
+    uploadOn2: true,
+    coordinates: ''
   }
 
   // constructor(props) {
