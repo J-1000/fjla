@@ -19,6 +19,7 @@ import Login from "./components/Login";
 import HoverRating from "./components/Rating";
 // import { Route, Redirect } from 'react-router-dom';
 import Slider from "./components/Slider";
+import Favorites from "./pages/Favorites";
 
 class App extends React.Component {
   state = {
@@ -39,6 +40,14 @@ class App extends React.Component {
           <ToolNavbar user={this.state.user} setUser={this.setUser} />
         </nav>
 
+        <Route 
+        exact 
+        path="/favorites"
+        render={(props) => (
+          <Favorites {...props} setUser={this.setUser} user = {this.state.user} /> 
+        )}
+        />
+
         <Route
           exact
           path="/myprofile"
@@ -46,6 +55,7 @@ class App extends React.Component {
             <Profile {...props} setUser={this.setUser} user={this.state.user} />
           )}
         />
+        
         <Route
           exact
           path="/signup"

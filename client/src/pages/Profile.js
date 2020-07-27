@@ -13,7 +13,8 @@ class Profile extends Component {
   }
   //console.log(props.data.email);
 
-  getData() {
+  getData= () => {
+    console.log("getData")
     axios.get("/api/places/userPlaces").then(response => {
       this.setState({
         places: response.data
@@ -26,6 +27,7 @@ class Profile extends Component {
   }
 
   render() {
+    console.log("render")
   return (
       <div>
           <h1> My Profile</h1>
