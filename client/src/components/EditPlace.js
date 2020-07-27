@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ImageUploader from 'react-images-upload';
 import axios from 'axios';
+import mapboxgl from "mapbox-gl"
+import MapBox from "./MapBox"
 
 class EditPlace extends Component {
   state = {
@@ -176,6 +178,7 @@ class EditPlace extends Component {
         /> */}
 
           <br></br>
+          <MapBox  className = "mapBoxHome"/>
           <br></br>
           {this.state.uploadOn2 ? <button disabled type='submit'> Add a Place </button> : <button type='submit'> Add a Place </button>}
 
