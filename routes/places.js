@@ -19,10 +19,10 @@ router.get('/userPlaces', (req, res) => {
 
  router.post('/new',uploadCloud.single("photo"), (req, res) => { 
   console.log("llamando?")
-  const {title, description} = req.body;
-  const imgPath=req.body.photo
+  const {title, description, latitude, longitude} = req.body;
+  const imgPath=req.body.photo;
   
-  Place.create({name: title, description, imgPath, userId: req.user._id}).then(newPlace => {
+  Place.create({name: title, description, imgPath, userId: req.user._id, latitude, longitude}).then(newPlace => {
     console.log(newPlace, "newPlace")
     res.json(newPlace)
   }).catch(err => console.log(err))

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
+import axios from "axios";
 import "./MapBox.css";
 import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -23,8 +24,11 @@ export default class MapBox extends Component {
         lat: 52.51,
         zoom: 8,
       },
+      places: [],
     };
   }
+
+
   // Fake Database to be replaced by data from our database
   loadFakeplacesfromFakeDB(place) {
     let markers = [];
@@ -39,6 +43,15 @@ export default class MapBox extends Component {
   }
 
   componentDidMount() {
+    axios
+      .get("/api/places")
+      .then((response) => {
+        console.log(response, "response");
+        this.setState({places: response.data});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -59,7 +72,7 @@ export default class MapBox extends Component {
       });
     });
     //sets marker where I click on the map:
-    map.on("click", function (e) {
+    map.on("click", (e) => {
       let addPlaceMarker = new mapboxgl.Marker()
         .setLngLat([e.lngLat.lng, e.lngLat.lat])
         .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
@@ -71,6 +84,8 @@ export default class MapBox extends Component {
       console.log(e.lngLat.lat);
       console.log(e.lngLat.lng);
       console.log(e.lngLat);
+      console.log(this.props)
+      this.props.handleMapChange(e.lngLat.lng, e.lngLat.lat)
     });
     // shows the userlocation
     map.addControl(
@@ -89,15 +104,13 @@ export default class MapBox extends Component {
       );
     // loads the places fom the fakeplacesDB method on load
     map.on("load", () => {
-      var markers = this.loadFakeplacesfromFakeDB(20);
-      //console.log(markers);
-      for (let i = 0; i < 20; i++) {
-        console.log(markers[i][0]);
+      this.state.places.forEach(place => {
         new mapboxgl.Marker()
-          .setLngLat([markers[i][0], markers[i][1]])
+          .setLngLat([place.longitude, place.latitude])
           .addTo(map);
-      }
+      })
     });
+    
     geocoder.addTo('#geocoder-container');
     
 

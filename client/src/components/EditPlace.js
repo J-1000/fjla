@@ -13,8 +13,10 @@ class EditPlace extends Component {
     userPhotoURL: "",
     uploadOn: true,
     uploadOn2: true,
-    coordinates: ''
-  }
+    coordinates: '',
+    longitude: "",
+    latitude: ""
+    }
 
   // constructor(props) {
   //   super(props);
@@ -42,6 +44,14 @@ class EditPlace extends Component {
     this.setState({
       [name]: value 
     }) 
+  }
+
+  handleMapChange = (longitude, latitude) => {
+    console.log(longitude, latitude, "handlemapchange")
+    this.setState({
+      longitude: longitude,
+      latitude: latitude
+    })
   }
 
   handleFileUpload = event => {
@@ -86,11 +96,13 @@ class EditPlace extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log("banana")
-    const { title, description,photo } = this.state;
+    const { title, description,photo, latitude, longitude } = this.state;
     const newPlace = {
       title,
       description,
-      photo
+      photo,
+      latitude,
+      longitude
     }
     // console.log(newPlace)
     axios
@@ -179,7 +191,7 @@ class EditPlace extends Component {
         /> */}
 
           <br></br>
-          <MapBox  className = "mapBoxHome"/>
+          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
           <br></br>
           {this.state.uploadOn2 ? <button disabled type='submit'> Add a Place </button> : <button type='submit'> Add a Place </button>}
 
