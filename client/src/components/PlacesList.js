@@ -46,6 +46,14 @@ class PlacesList extends Component {
 
   handleDislike = id => {
     console.log("like", id)
+    // wenn likes in PlacesDetails ist
+    // if ( likes > 0 ) {
+    //   axios
+    // .post(`/api/places/dislike/${id}`) 
+    // .then((response) => {
+    //   console.log(response.data);
+    //   this.props.getData();
+    // })
     axios
     .post(`/api/places/dislike/${id}`) 
     .then((response) => {
@@ -55,7 +63,8 @@ class PlacesList extends Component {
     .catch((err) => {
       return err.response.data;
     });
-  }
+    }
+    
 
   componentDidUpdate(prevProps, _) {
     if (prevProps.places !== this.props.places) {
