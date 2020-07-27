@@ -51,7 +51,6 @@ class SearchableMap extends Component {
       const { viewport, searchResultLayer} = this.state
       return (
         <div style={{ height: '100vh'}}>
-          <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>Use the search bar to find a location or click <a href="/">here</a> to find your location</h1>
           <MapGL 
             ref={this.mapRef}
             {...viewport}

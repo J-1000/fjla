@@ -2,8 +2,16 @@ import React, { Component } from "react";
 import mapboxgl from "mapbox-gl";
 import "./MapBox.css";
 import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXJ0ZWxzaW0iLCJhIjoiY2tjenh5NzFjMG9iNTJ0b3V4emM4azN4cSJ9.ND9UOA3cfWrFtJv2gjojPw';
 
 //var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+
+const geocoder = new MapboxGeocoder({
+  accessToken: mapboxgl.accessToken,
+  mapboxgl: mapboxgl
+});
 
 export default class MapBox extends Component {
   constructor(props) {
@@ -71,7 +79,12 @@ export default class MapBox extends Component {
         trackUserLocation: true,
       })
     );
-
+    map.addControl(
+      new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+      })
+      );
     // loads the places fom the fakeplacesDB method on load
     map.on("load", () => {
       var markers = this.loadFakeplacesfromFakeDB(20);
@@ -83,6 +96,9 @@ export default class MapBox extends Component {
           .addTo(map);
       }
     });
+    //geocoder.addTo(this.mapContainer);
+    
+
     //  other experiment with geojson, example from the docs
     var geojson = {
       type: "FeatureCollection",
