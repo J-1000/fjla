@@ -20,8 +20,8 @@ class PlacesList extends Component {
       {this.state.places.map(place => {
         return (
           <div key={place._id}>
+          <img className="myPlaces" src={place.imgPath} />
           <p>{place.name}</p>
-          <img className="profileimg" src={place.imgPath} />
           </div>
         )
       })}

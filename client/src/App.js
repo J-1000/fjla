@@ -16,9 +16,9 @@ import Login from "./components/Login";
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
 //import TaskDetails from './components/TaskDetails';
-import HoverRating from "./components/Rating";
 // import { Route, Redirect } from 'react-router-dom';
 import Slider from "./components/Slider";
+import Edit from "./pages/Edit";
 
 class App extends React.Component {
   state = {
@@ -32,7 +32,9 @@ class App extends React.Component {
   };
 
   render() {
+    
     console.log(this.state.user);
+
     return (
       <div className="homeApp">
         <nav>
@@ -46,6 +48,21 @@ class App extends React.Component {
             <Profile {...props} setUser={this.setUser} user={this.state.user} />
           )}
         />
+
+        {/* new Route */}
+
+        <Route
+          exact
+          path="/edit"
+          render={(props) => (
+            <div>
+              <Edit />
+            </div>
+          )}
+        />
+
+        {/* end new rout  */}
+
         <Route
           exact
           path="/signup"
@@ -65,7 +82,6 @@ class App extends React.Component {
               <div className="searchBar-inner">
                 <Search />
                 <Slider className="sliderComponent slide" />
-                <HoverRating />
               </div>
             </div>
           )}

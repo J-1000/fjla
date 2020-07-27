@@ -1,8 +1,8 @@
 import React from "react";
 import ToolNavbar from "./ToolNavbar";
-import Search from "./Search"
-import MapBox from "./MapBox"
-import "./Home.css"
+import Search from "./Search";
+import MapBox from "./MapBox";
+import "./Home.css";
 
 export default function Home() {
   return (
@@ -11,6 +11,7 @@ export default function Home() {
       <Search />
   
       <MapBox  className = "mapBoxHome"/>
+     
     </div>
   );
 }
