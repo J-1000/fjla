@@ -19,8 +19,11 @@ export default class MapBox extends Component {
   // Fake Database to be replaced by data from our database
   loadFakeplacesfromFakeDB(place) {
     let markers = [];
-    for (let i =0; i < place; i++) {
-      markers.push([( parseFloat(13) + parseFloat(Math.random().toFixed(4))), ( parseFloat(52) + parseFloat(Math.random().toFixed(4)))])
+    for (let i = 0; i < place; i++) {
+      markers.push([
+        parseFloat(13) + parseFloat(Math.random().toFixed(4)),
+        parseFloat(52) + parseFloat(Math.random().toFixed(4)),
+      ]);
     }
     //console.log(markers);
     return markers;
@@ -47,19 +50,19 @@ export default class MapBox extends Component {
       });
     });
     //sets marker where I click on the map:
-    map.on('click', function(e) {
+    map.on("click", function (e) {
       let addPlaceMarker = new mapboxgl.Marker()
-      .setLngLat([e.lngLat.lng, e.lngLat.lat])
-      .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
-      .addTo(map);
+        .setLngLat([e.lngLat.lng, e.lngLat.lat])
+        .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+        .addTo(map);
       // The event object (e) contains information like the
       // coordinates of the point on the map that was clicked.
-      console.log('A click event has occurred at ' + e.lngLat);
-      console.log('A Pin was placed at ' + e.lngLat);
+      console.log("A click event has occurred at " + e.lngLat);
+      console.log("A Pin was placed at " + e.lngLat);
       console.log(e.lngLat.lat);
       console.log(e.lngLat.lng);
-      });
-    // shows the userlocation 
+    });
+    // shows the userlocation
     map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -69,16 +72,17 @@ export default class MapBox extends Component {
       })
     );
 
-   // loads the places fom the fakeplacesDB method on load
-    map.on('load', () => {
+    // loads the places fom the fakeplacesDB method on load
+    map.on("load", () => {
       var markers = this.loadFakeplacesfromFakeDB(20);
       //console.log(markers);
-      for (let i =0; i < 20; i++) {
+      for (let i = 0; i < 20; i++) {
         console.log(markers[i][0]);
-        new mapboxgl.Marker().setLngLat([markers[i][0], markers[i][1]]).addTo(map);
+        new mapboxgl.Marker()
+          .setLngLat([markers[i][0], markers[i][1]])
+          .addTo(map);
       }
-
-      });
+    });
     //  other experiment with geojson, example from the docs
     var geojson = {
       type: "FeatureCollection",
@@ -139,22 +143,22 @@ export default class MapBox extends Component {
   }
   // rest of the first try of geolocating the User
   //setUserLocation = () => {
-    //navigator.geolocation.getCurrentPosition((position) => {
-      //let newViewport = {
-        //height: "100vh",
-        //width: "100vw",
-        //lng: position.coords.longitude,
-        //lat: position.coords.latitude,
-        //zoom: 12,
-      //};
-      //console.log(position.coords.latitude);
-      //console.log(position.coords.longitude);
-      //console.log(newViewport);
+  //navigator.geolocation.getCurrentPosition((position) => {
+  //let newViewport = {
+  //height: "100vh",
+  //width: "100vw",
+  //lng: position.coords.longitude,
+  //lat: position.coords.latitude,
+  //zoom: 12,
+  //};
+  //console.log(position.coords.latitude);
+  //console.log(position.coords.longitude);
+  //console.log(newViewport);
 
-      //this.setState({
-       // viewport: newViewport,
-      //});
-    //});
+  //this.setState({
+  // viewport: newViewport,
+  //});
+  //});
   //};
 
   //<button onClick={this.setUserLocation}>My Location</button>
@@ -163,11 +167,8 @@ export default class MapBox extends Component {
     const { lng, lat, zoom } = this.state;
     return (
       <>
-
-        <div ref={(el) => (this.mapContainer = el)} className="mapContainer"  />
-        
+        <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
         //<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-
         <div className="sidebarStyle">
           Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
           {this.state.zoom}
