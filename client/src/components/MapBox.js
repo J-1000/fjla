@@ -113,64 +113,24 @@ export default class MapBox extends Component {
     
     geocoder.addTo('#geocoder-container');
     
-
-    //  other experiment with geojson, example from the docs
-    var geojson = {
-      type: "FeatureCollection",
-      features: [
-        {
-          type: "Feature",
-          properties: {
-            message: "Berlins geilster Zeltplatz",
-            iconSize: [20, 20],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [13.5083, 52.5444],
-          },
-        },
-        {
-          type: "Feature",
-          properties: {
-            message: "Superschöner Ort zum Zelten",
-            iconSize: [20, 20],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [13.0016, 52.5544],
-          },
-        },
-        {
-          type: "Feature",
-          properties: {
-            message: "Baz",
-            iconSize: [40, 40],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [-63.29223632812499, -18.28151823530889],
-          },
-        },
-      ],
-    };
-
+    
     // add markers to map
-    geojson.features.forEach(function (marker) {
+    //geojson.features.forEach(function (marker) {
       // create a DOM element for the marker
-      var el = document.createElement("div");
-      el.className = "marker";
-      el.style.backgroundImage =
-        'url("http://res.cloudinary.com/dvhpj9qdj/image/upload/v1595777135/tent_pictures/IMG_8540.jpg")';
-      el.style.width = marker.properties.iconSize[0] + "px";
-      el.style.height = marker.properties.iconSize[0] + "px";
+     // var el = document.createElement("div");
+     // el.className = "marker";
+      //el.style.backgroundImage =
+     //   'url("http://res.cloudinary.com/dvhpj9qdj/image/upload/v1595777135/tent_pictures/IMG_8540.jpg")';
+      //el.style.width = marker.properties.iconSize[0] + "px";
+     // el.style.height = marker.properties.iconSize[0] + "px";
 
-      el.addEventListener("click", function () {
-        window.alert(marker.properties.message);
-      });
+     // el.addEventListener("click", function () {
+      //  window.alert(marker.properties.message);
+     // });
 
       // add marker to map
-      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
-    });
+      //new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
+    //});
   }
   // rest of the first try of geolocating the User
   //setUserLocation = () => {
@@ -200,7 +160,7 @@ export default class MapBox extends Component {
       <>
         <div id='geocoder-container'></div>
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
-        //<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+        
         <div className="sidebarStyle">
           Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
           {this.state.zoom}
