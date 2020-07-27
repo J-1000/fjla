@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ImageUploader from 'react-images-upload';
 import axios from 'axios';
 import mapboxgl from "mapbox-gl"
 import MapBox from "./MapBox"
@@ -13,16 +12,13 @@ class EditPlace extends Component {
     userPhotoURL: "",
     uploadOn: true,
     uploadOn2: true,
-    coordinates: '',
     longitude: "",
-    latitude: ""
-    }
+    latitude: "",
+    places: [],
+    Likes: 0
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { pictures: [] };
-  //   this.onDrop = this.onDrop.bind(this);
-  // }
+  }
+
 
   onDrop=(picture)=> {
     this.setState({
@@ -91,7 +87,6 @@ class EditPlace extends Component {
     .catch(err => console.log("Error while uploading the file", err)) 
   } 
  
-  // what is missing?
 
   handleSubmit = event => {
     event.preventDefault();
@@ -109,15 +104,11 @@ class EditPlace extends Component {
     .post("/api/places/new", newPlace)
     .then((response) => {
       console.log(response.data);
+      this.props.getData();
     })
     .catch((err) => {
       return err.response.data;
     });
-    // this.setState((state, props) => ({
-    //   places: [newPlace, ...state.places],
-    //   title: '',
-    //   description: '',
-    // }))
   }
 
   handleSubmitUserProfile = event => {
@@ -142,6 +133,8 @@ class EditPlace extends Component {
       this.render()
     }
   }
+
+  
 
   render() {
     console.log(this.state)
@@ -181,14 +174,6 @@ class EditPlace extends Component {
           />
           
           <input type="file" name="photo" onChange={this.handleFileUpload}></input>
-       {/*    <ImageUploader
-          withIcon={true}
-          name="photo"
-          buttonText='Choose images'
-          onChange={this.onDrop}
-          imgExtension={['.jpg', '.gif', '.png', '.gif']}
-          maxFileSize={5242880}
-        /> */}
 
           <br></br>
           <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />

@@ -2,26 +2,82 @@ import React, {Component} from "react";
 import axios from "axios";
 
 class PlacesList extends Component {
-  state= {
-    places: [],
-  }
+  // state= {
+  //   places: [],
+  // }
   
-  componentDidMount() {
-    axios.get("/api/places/userPlaces").then(response => {
-      this.setState({
-        places: response.data
-      })
-    }).catch(err => console.log(err))
+  // getData() {
+  //   axios.get("/api/places/userPlaces").then(response => {
+  //     this.setState({
+  //       places: response.data
+  //     })
+  //   }).catch(err => console.log(err))
+  // }
+
+  // componentDidMount() {
+  //   this.getData()
+  // }
+
+  handleDelete = id => {
+    console.log("delete", id)
+    axios
+    .post(`/api/places/delete/${id}`) 
+    .then((response) => {
+      console.log(response.data);
+      this.props.getData();
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
   }
+
+  handleLike = id => {
+    console.log("like", id)
+    axios
+    .post(`/api/places/like/${id}`) 
+    .then((response) => {
+      console.log(response.data);
+      this.props.getData();
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  }
+
+  handleDislike = id => {
+    console.log("like", id)
+    axios
+    .post(`/api/places/dislike/${id}`) 
+    .then((response) => {
+      console.log(response.data);
+      this.props.getData();
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  }
+
+  componentDidUpdate(prevProps, _) {
+    if (prevProps.places !== this.props.places) {
+      this.render()
+    }
+  }
+
 
   render() {
     return (
       <div>
-      {this.state.places.map(place => {
+      {this.props.places.map(place => {
         return (
           <div key={place._id}>
           <p>{place.name}</p>
           <img className="profileimg" src={place.imgPath} />
+          <p> {place.description} </p>
+          <p>Likes: {place.likes} </p> 
+          <button type="like" onClick= {() => this.handleLike(place._id)}> Like </button>
+          <button type="like" onClick= {() => this.handleDislike(place._id)}> Dislike </button>
+          <br></br>
+          <button type="delete" onClick= {() => this.handleDelete(place._id)}> Delete Place </button>
           </div>
         )
       })}
