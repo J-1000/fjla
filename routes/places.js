@@ -33,4 +33,26 @@ router.post("/uploadImage",uploadCloud.single("imagePath"),(req,res)=>{
   res.json(req.file.url)
 })
 
+router.post("/delete/:id", (req,res)=>{
+  console.log(req.params.id)
+  Place.findByIdAndDelete(req.params.id)
+  .then(()=> res.json({message: "ok"}))
+})
+
+router.post("/like/:id", (req, res) => {
+  res.send(req.params.something)
+Place.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, { new: true }).then(post => {
+  
+    console.log("post", post);
+})
+})
+
+router.post("/dislike/:id", (req, res) => {
+  res.send(req.params.something)
+Place.findByIdAndUpdate(req.params.id, { $inc: { likes: -1 } }, { new: true }).then(post => {
+  
+    console.log("post", post);
+})
+})
+
 module.exports = router;
