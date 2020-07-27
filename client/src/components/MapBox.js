@@ -1,55 +1,179 @@
-import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl';
-import './MapBox.css';
-import MapGL, {NavigationControl, Marker,Popup} from "react-map-gl";
+import React, { Component } from "react";
+import mapboxgl from "mapbox-gl";
+import "./MapBox.css";
+import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
 
 //var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
-
-
 
 export default class MapBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    lng: 5,
-    lat: 34,
-    zoom: 2
+      viewport: {
+        lng: 13.33,
+        lat: 52.51,
+        zoom: 8,
+      },
     };
+  }
+  // Fake Database to be replaced by data from our database
+  loadFakeplacesfromFakeDB(place) {
+    let markers = [];
+    for (let i = 0; i < place; i++) {
+      markers.push([
+        parseFloat(13) + parseFloat(Math.random().toFixed(4)),
+        parseFloat(52) + parseFloat(Math.random().toFixed(4)),
+      ]);
     }
-
-    componentDidMount() {
-    const map = new mapboxgl.Map({
-    container: this.mapContainer,
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [this.state.lng, this.state.lat],
-    zoom: this.state.zoom
-    });
-
-    map.on('move', () => {
-      this.setState({
-      lng: map.getCenter().lng.toFixed(4),
-      lat: map.getCenter().lat.toFixed(4),
-      zoom: map.getZoom().toFixed(2)
-      });
-      });
-    }
-
-  render() {
-    return (
-      
-    <>
-      <div ref={el => this.mapContainer = el} className="mapContainer"/>
-     
-      <div className='sidebarStyle'>
-      Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "} {this.state.zoom}
-       </div>
-      
-    </ >
-    )
+    //console.log(markers);
+    return markers;
   }
 
-  
+  componentDidMount() {
+    const map = new mapboxgl.Map({
+      container: this.mapContainer,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [this.state.viewport.lng, this.state.viewport.lat],
+      zoom: this.state.viewport.zoom,
+    });
+    //sets one marker specific coordinates:
+    var marker = new mapboxgl.Marker()
+      .setLngLat([13.3509, 52.5113])
+      .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+      .addTo(map);
+
+    map.on("move", () => {
+      this.setState({
+        lng: map.getCenter().lng.toFixed(4),
+        lat: map.getCenter().lat.toFixed(4),
+        zoom: map.getZoom().toFixed(2),
+      });
+    });
+    //sets marker where I click on the map:
+    map.on("click", function (e) {
+      let addPlaceMarker = new mapboxgl.Marker()
+        .setLngLat([e.lngLat.lng, e.lngLat.lat])
+        .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+        .addTo(map);
+      // The event object (e) contains information like the
+      // coordinates of the point on the map that was clicked.
+      console.log("A click event has occurred at " + e.lngLat);
+      console.log("A Pin was placed at " + e.lngLat);
+      console.log(e.lngLat.lat);
+      console.log(e.lngLat.lng);
+    });
+    // shows the userlocation
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    );
+
+    // loads the places fom the fakeplacesDB method on load
+    map.on("load", () => {
+      var markers = this.loadFakeplacesfromFakeDB(20);
+      //console.log(markers);
+      for (let i = 0; i < 20; i++) {
+        console.log(markers[i][0]);
+        new mapboxgl.Marker()
+          .setLngLat([markers[i][0], markers[i][1]])
+          .addTo(map);
+      }
+    });
+    //  other experiment with geojson, example from the docs
+    var geojson = {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: {
+            message: "Berlins geilster Zeltplatz",
+            iconSize: [20, 20],
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [13.5083, 52.5444],
+          },
+        },
+        {
+          type: "Feature",
+          properties: {
+            message: "Superschöner Ort zum Zelten",
+            iconSize: [20, 20],
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [13.0016, 52.5544],
+          },
+        },
+        {
+          type: "Feature",
+          properties: {
+            message: "Baz",
+            iconSize: [40, 40],
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [-63.29223632812499, -18.28151823530889],
+          },
+        },
+      ],
+    };
+
+    // add markers to map
+    geojson.features.forEach(function (marker) {
+      // create a DOM element for the marker
+      var el = document.createElement("div");
+      el.className = "marker";
+      el.style.backgroundImage =
+        'url("http://res.cloudinary.com/dvhpj9qdj/image/upload/v1595777135/tent_pictures/IMG_8540.jpg")';
+      el.style.width = marker.properties.iconSize[0] + "px";
+      el.style.height = marker.properties.iconSize[0] + "px";
+
+      el.addEventListener("click", function () {
+        window.alert(marker.properties.message);
+      });
+
+      // add marker to map
+      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
+    });
+  }
+  // rest of the first try of geolocating the User
+  //setUserLocation = () => {
+  //navigator.geolocation.getCurrentPosition((position) => {
+  //let newViewport = {
+  //height: "100vh",
+  //width: "100vw",
+  //lng: position.coords.longitude,
+  //lat: position.coords.latitude,
+  //zoom: 12,
+  //};
+  //console.log(position.coords.latitude);
+  //console.log(position.coords.longitude);
+  //console.log(newViewport);
+
+  //this.setState({
+  // viewport: newViewport,
+  //});
+  //});
+  //};
+
+  //<button onClick={this.setUserLocation}>My Location</button>
+
+  render() {
+    const { lng, lat, zoom } = this.state;
+    return (
+      <>
+        <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
+        //<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+        <div className="sidebarStyle">
+          Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
+          {this.state.zoom}
+        </div>
+      </>
+    );
+  }
 }
-
-
-

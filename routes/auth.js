@@ -12,11 +12,12 @@ router.post("/uploadImage",uploadCloud2.single("imagePath"),(req,res)=>{
 })
 
 router.post('/profilePicture',uploadCloud2.single("photo"), (req, res) => { 
-  console.log("llamando?")
+
+  console.log("llamando?", req.user)
   const imgPath=req.body.photo;
-  const userId = "5f19695c230147a4bfb1c710";
+  const userId = req.user._id;
   console.log(req.body, imgPath, " imgPath")
-  User.findByIdAndUpdate(userId, {photo: imgPath}).then(userUpdated => {
+  User.findByIdAndUpdate(userId, {photo: imgPath}, { new: true}).then(userUpdated => {
     console.log(userUpdated, "userUpdated")
     res.json(userUpdated)
   }).catch(err => console.log(err))
