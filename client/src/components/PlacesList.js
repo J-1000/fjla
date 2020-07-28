@@ -35,7 +35,7 @@ class PlacesList extends Component {
   handleLike = id => {
     console.log("like", id)
     axios
-    .post(`/api/places/like/${id}`) 
+    .put(`/api/places/like/${id}`)  
     .then((response) => {
       console.log(response.data);
       this.props.getData();
@@ -45,26 +45,7 @@ class PlacesList extends Component {
     });
   }
 
-  handleDislike = id => {
-    console.log("like", id)
-    // wenn likes in PlacesDetails ist
-    // if ( likes > 0 ) {
-    //   axios
-    // .post(`/api/places/dislike/${id}`) 
-    // .then((response) => {
-    //   console.log(response.data);
-    //   this.props.getData();
-    // })
-    axios
-    .post(`/api/places/dislike/${id}`) 
-    .then((response) => {
-      console.log(response.data);
-      this.props.getData();
-    })
-    .catch((err) => {
-      return err.response.data;
-    });
-    }
+  
     
 
   componentDidUpdate(prevProps, _) {
@@ -82,11 +63,11 @@ class PlacesList extends Component {
           <div key={place._id}>
           <img className="myPlaces" src={place.imgPath} />
           <Link to={`/place/${place._id}`}><p>{place.name}</p></Link>
-          <img className="profileimg" src={place.imgPath} />
+          {/* <img className="profileimg" src={place.imgPath} /> */}
           <p> {place.description} </p>
+        <p>{}</p>
           <p>Likes: {place.likes} </p> 
           <button type="like" onClick= {() => this.handleLike(place._id)}> Like </button>
-          <button type="like" onClick= {() => this.handleDislike(place._id)}> Dislike </button>
           <br></br>
           <button type="delete" onClick= {() => this.handleDelete(place._id)}> Delete Place </button>
           </div>

@@ -106,6 +106,7 @@ export default class MapBox extends Component {
     map.on("load", () => {
       this.state.places.forEach(place => {
         new mapboxgl.Marker()
+        // console.log("this is the place" , place)
           .setLngLat([place.longitude, place.latitude])
           .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
           .addTo(map);

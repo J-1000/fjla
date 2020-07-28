@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Place = require("../models/Place");
+const User = require("../models/User");
 const {uploadCloud} = require("../configs/cloudinary");
 
 router.get('/', (req, res) => {
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/details/:placeId', (req, res) => {
-  Place.findById(req.params.placeId).then(place => {
+  Place.findById(req.params.placeId).populate("favorites").then(place => {
     res.json(place)
   }).catch(err => console.log(err))
 });
@@ -45,20 +46,64 @@ router.post("/delete/:id", (req,res)=>{
   .then(()=> res.json({message: "ok"}))
 })
 
-router.post("/like/:id", (req, res) => {
-  res.send(req.params.something)
-Place.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } }, { new: true }).then(post => {
-  
-    console.log("post", post);
-})
-})
 
-router.post("/dislike/:id", (req, res) => {
-  res.send(req.params.something)
-Place.findByIdAndUpdate(req.params.id, { $inc: { likes: -1 } }, { new: true }).then(post => {
+router.put("/like/:placeId", async (req, res) => {
+  const userId = req.user._id;
   
-    console.log("post", post);
-})
-})
+  let user = await User.findById(userId);
+  let isFavorite = user.favorites.find((favorite) => {
+    return favorite == req.params.placeId;
+  });
+  
+  if (isFavorite) {
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { favorites: req.params.placeId },
+      },
+      {
+        new: true,
+      }
+    )
+      .populate("favorites")
+      .then((userUpdated) => {
+        Place.findByIdAndUpdate(req.params.placeId, { $inc: { likes: -1 } }, { new: true }).then(placeUpdated => {
+          res.json(placeUpdated)
+        })
+      })
+      .catch((err) => res.status(400).json(err));
+  } else {
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { favorites: req.params.placeId },
+      },
+      {
+        new: true,
+      }
+    )
+      .populate("favorites")
+      .then((userUpdated) => {
+        Place.findByIdAndUpdate(req.params.placeId, { $inc: { likes: 1 } }, { new: true }).then(placeUpdated => {
+          res.json(placeUpdated)
+        })
+      })
+      .catch((err) => res.status(400).json(err));
+  }
+});
+
+router.get("/favorites", (req, res) => {
+  User.findById(req.user._id)
+    .populate("favorites")
+    .then((user) => {
+      if (!user) {
+        res.status(404).json(user);
+      }
+      res.json(user);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+});
 
 module.exports = router;
