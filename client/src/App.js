@@ -25,6 +25,7 @@ import Favorites from "./pages/Favorites";
 class App extends React.Component {
   state = {
     user: this.props.user,
+    editMap: false,
   };
 
   setUser = (user) => {
