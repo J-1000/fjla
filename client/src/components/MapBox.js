@@ -59,17 +59,11 @@ export default class MapBox extends Component {
       center: [this.state.viewport.lng, this.state.viewport.lat],
       zoom: this.state.viewport.zoom,
     });
-    ///loading images of the places into markers
-    var el = document.createElement("div");
-    el.className = "marker";
-    el.style.backgroundImage = "url(this.place.imgPath)";
-    el.style.width = "20px";
-    el.style.height = "20px";
     //sets one marker specific coordinates:
-    var marker = new mapboxgl.Marker()
-      .setLngLat([13.3509, 52.5113])
-      .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
-      .addTo(map);
+    //var marker = new mapboxgl.Marker()
+//.setLngLat([13.3509, 52.5113])
+//.setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+      //.addTo(map);
 
     map.on("move", () => {
       this.setState({
@@ -117,20 +111,24 @@ export default class MapBox extends Component {
         //let bckgImg = place.imgPath
         el.style.backgroundImage = `url(${place.imgPath})`;
         console.log("this is place.imgPath:",place.imgPath);
-        el.style.width = "20px";
-        el.style.height = "20px";
+        el.style.width = "40px";
+        el.style.height = "40px";
         
-        new mapboxgl.Marker(el).setLngLat([place.longitude, place.latitude]).addTo(map);
-        new mapboxgl.Marker()
-          .setLngLat([place.longitude, place.latitude])
-          .setPopup(new mapboxgl.Popup().setHTML( `<img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="#placeDetail">See Details</a>`))
-          .addTo(map);
+        new mapboxgl.Marker(el)
+        .setLngLat([place.longitude, place.latitude])
+        .setPopup(new mapboxgl.Popup().setHTML( `<img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="#placeDetail">See Details</a>`))
+        .addTo(map);
+
+        //new mapboxgl.Marker()
+         // .setLngLat([place.longitude, place.latitude])
+          //.setPopup(new mapboxgl.Popup().setHTML( `<img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="#placeDetail">See Details</a>`))
+          //.addTo(map);
       });
     });
 
     map.getCanvas().style.cursor = "pointer";
 
-    geocoder.addTo("#geocoder-container");
+    //geocoder.addTo("#geocoder-container");
 
     // add markers to map
     //geojson.features.forEach(function (marker) {
@@ -176,7 +174,7 @@ export default class MapBox extends Component {
     const { lng, lat, zoom } = this.state;
     return (
       <>
-        <div id="geocoder-container"></div>
+        
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
 
         <div className="sidebarStyle">
