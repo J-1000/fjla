@@ -25,6 +25,7 @@ import Favorites from "./pages/Favorites";
 class App extends React.Component {
   state = {
     user: this.props.user,
+    editMap: false,
   };
 
   setUser = (user) => {
@@ -32,6 +33,16 @@ class App extends React.Component {
       user: user,
     });
   };
+
+
+  handleMapChange = (longitude, latitude) => {
+    console.log(longitude, latitude, "handlemapchange")
+    this.setState({
+      longitude: longitude,
+      latitude: latitude
+    })
+  }
+
 
   render() {
     
@@ -101,6 +112,7 @@ class App extends React.Component {
                 <Search />
                 <Slider className="sliderComponent slide" />
               </div>
+              <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
             </div>
           )}
         />
