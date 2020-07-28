@@ -1,24 +1,28 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Rating from './Rating'
 
 
 
-function Slider () {
+
+function Slider (props) {
+
 return (
 <Carousel>
   <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="/BER1.jpg"
-      alt="FileReader
-      st slide"
-    />
+  
+
     <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    
+    <p> Hello </p> 
+      
     </Carousel.Caption>
+
+
   </Carousel.Item>
+
+
   <Carousel.Item>
     <img
       className="d-block w-100"
@@ -43,6 +47,7 @@ return (
       <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
     </Carousel.Caption>
   </Carousel.Item>
+
 </Carousel>
 )
 }

@@ -12,6 +12,7 @@ export default function Home() {
      
       <Search />
       <MapBox  className = "mapBoxHome"/>
+     
     </div>
   );
 }
