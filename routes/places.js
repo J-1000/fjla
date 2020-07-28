@@ -9,6 +9,12 @@ router.get('/', (req, res) => {
   }).catch(err => console.log(err))
 });
 
+router.get('/details/:placeId', (req, res) => {
+  Place.findById(req.params.placeId).then(place => {
+    res.json(place)
+  }).catch(err => console.log(err))
+});
+
 router.get('/userPlaces', (req, res) => {
   console.log(req.user._id, "ID")
   Place.find({userId: req.user._id}).then(userPlaces => {

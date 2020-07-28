@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import axios from "axios";
 
 class PlacesList extends Component {
@@ -46,6 +47,14 @@ class PlacesList extends Component {
 
   handleDislike = id => {
     console.log("like", id)
+    // wenn likes in PlacesDetails ist
+    // if ( likes > 0 ) {
+    //   axios
+    // .post(`/api/places/dislike/${id}`) 
+    // .then((response) => {
+    //   console.log(response.data);
+    //   this.props.getData();
+    // })
     axios
     .post(`/api/places/dislike/${id}`) 
     .then((response) => {
@@ -55,7 +64,8 @@ class PlacesList extends Component {
     .catch((err) => {
       return err.response.data;
     });
-  }
+    }
+    
 
   componentDidUpdate(prevProps, _) {
     if (prevProps.places !== this.props.places) {
@@ -70,7 +80,8 @@ class PlacesList extends Component {
       {this.props.places.map(place => {
         return (
           <div key={place._id}>
-          <p>{place.name}</p>
+          <img className="myPlaces" src={place.imgPath} />
+          <Link to={`/place/${place._id}`}><p>{place.name}</p></Link>
           <img className="profileimg" src={place.imgPath} />
           <p> {place.description} </p>
           <p>Likes: {place.likes} </p> 
