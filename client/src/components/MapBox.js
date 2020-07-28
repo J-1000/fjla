@@ -74,10 +74,13 @@ export default class MapBox extends Component {
       });
     });
     //sets marker where I click on the map:
-    map.on("click", (e) => {
+   
+  
+    map.on('click', (e) => {
+     
       let addPlaceMarker = new mapboxgl.Marker()
         .setLngLat([e.lngLat.lng, e.lngLat.lat])
-        .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+        //.setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
         .addTo(map);
       // The event object (e) contains information like the
       // coordinates of the point on the map that was clicked.
@@ -88,7 +91,10 @@ export default class MapBox extends Component {
       console.log(e.lngLat);
       console.log(this.props);
       this.props.handleMapChange(e.lngLat.lng, e.lngLat.lat);
-    });
+      setInterval(function(){addPlaceMarker.remove()},2000);
+      setTimeout(function(){alert("Marker of location is set and saved.")},500);
+      })
+    
     // shows the userlocation
     map.addControl(
       new mapboxgl.GeolocateControl({
@@ -97,7 +103,7 @@ export default class MapBox extends Component {
         },
         trackUserLocation: true,
       })
-    );
+    )
     map.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -114,6 +120,12 @@ export default class MapBox extends Component {
         console.log("this is place.imgPath:",place.imgPath);
         el.style.width = "40px";
         el.style.height = "40px";
+        //el.addEventListener('click', () => 
+   //{ 
+      //alert("Marker Clicked.");
+     // map.off("click")
+   //}
+//); 
         
         new mapboxgl.Marker(el)
         .setLngLat([place.longitude, place.latitude])
