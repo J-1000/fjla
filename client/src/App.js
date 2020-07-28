@@ -12,6 +12,7 @@ import "./components/MapBox.css";
 import Home from "./components/Home";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
+import PlaceDetails from "./components/PlaceDetails";
 // import Projects from './components/Projects';
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
@@ -46,6 +47,14 @@ class App extends React.Component {
           path="/myprofile"
           render={(props) => (
             <Profile {...props} setUser={this.setUser} user={this.state.user} />
+          )}
+        />
+
+        <Route
+          exact
+          path="/place/:placeId"
+          render={(props) => (
+            <PlaceDetails {...props} user={this.state.user} />
           )}
         />
 

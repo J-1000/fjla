@@ -9,7 +9,9 @@ const placeSchema = new Schema(
     imgName: String,
     imgPath: String,
     imgPublicId: String,
-    pin: Array,
+    longitude: Number,
+    latitude: Number,
+    coordinates: Object,
     likes: Number,
     comments: String,
     userId: {

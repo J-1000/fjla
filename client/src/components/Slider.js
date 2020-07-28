@@ -1,7 +1,6 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import PlacesList from './PlacesList'
 import Rating from './Rating'
 
 
@@ -13,8 +12,6 @@ return (
 <Carousel>
   <Carousel.Item>
   
-  <PlacesList 
-   />
 
     <Carousel.Caption>
     
@@ -26,7 +23,7 @@ return (
   </Carousel.Item>
 
 
-  {/* <Carousel.Item>
+  <Carousel.Item>
     <img
       className="d-block w-100"
       src="/BER2.jpg"
@@ -49,7 +46,7 @@ return (
       <h3>Third slide label</h3>
       <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
     </Carousel.Caption>
-  </Carousel.Item> */}
+  </Carousel.Item>
 
 </Carousel>
 )
