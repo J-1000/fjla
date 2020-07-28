@@ -117,7 +117,7 @@ export default class MapBox extends Component {
         
         new mapboxgl.Marker(el)
         .setLngLat([place.longitude, place.latitude])
-        .setPopup(new mapboxgl.Popup().setHTML( `<img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="/place/${place._id}">See Details</a>`))
+        .setPopup(new mapboxgl.Popup().setHTML( `<p><b>${place.name}</b></p><img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="/place/${place._id}">See Details</a>`))
         .addTo(map);
 
         //new mapboxgl.Marker()
