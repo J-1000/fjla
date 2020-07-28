@@ -33,6 +33,16 @@ class App extends React.Component {
     });
   };
 
+
+  handleMapChange = (longitude, latitude) => {
+    console.log(longitude, latitude, "handlemapchange")
+    this.setState({
+      longitude: longitude,
+      latitude: latitude
+    })
+  }
+
+
   render() {
     
     console.log(this.state.user);
@@ -101,6 +111,7 @@ class App extends React.Component {
                 <Search />
                 <Slider className="sliderComponent slide" />
               </div>
+              <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
             </div>
           )}
         />
