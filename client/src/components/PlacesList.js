@@ -81,7 +81,7 @@ class PlacesList extends Component {
         return (
           <div key={place._id}>
           <img className="myPlaces" src={place.imgPath} />
-          <Link to={`/place/${place._id}`}><p>{place.name}</p></Link>
+          <Link id="placeDetail" to={`/place/${place._id}`}><p>{place.name}</p></Link>
           <img className="profileimg" src={place.imgPath} />
           <p> {place.description} </p>
           <p>Likes: {place.likes} </p> 
