@@ -20,6 +20,7 @@ import PlaceDetails from "./components/PlaceDetails";
 // import { Route, Redirect } from 'react-router-dom';
 import Slider from "./components/Slider";
 import Edit from "./pages/Edit";
+import Favorites from "./pages/Favorites";
 
 class App extends React.Component {
   state = {
@@ -41,6 +42,14 @@ class App extends React.Component {
         <nav>
           <ToolNavbar user={this.state.user} setUser={this.setUser} />
         </nav>
+
+        <Route 
+        exact 
+        path="/favorites"
+        render={(props) => (
+          <Favorites {...props} setUser={this.setUser} user = {this.state.user} /> 
+        )}
+        />
 
         <Route
           exact

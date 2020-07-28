@@ -19,6 +19,18 @@ class EditPlace extends Component {
 
   }
 
+// in edit list likes updaten via setState 
+// prop in places list übergeben mit Referenz auf update likes funktion
+// in placesList onclick triggered funktion aus props
+
+updateLikes = (like) => {
+  this.setState({
+    likes: this.state.likes+like
+  })
+}
+
+
+
 
   onDrop = (picture) => {
     this.setState({
@@ -107,7 +119,7 @@ class EditPlace extends Component {
     .post("/api/places/new", newPlace)
     .then((response) => {
       console.log(response.data);
-      this.props.getData();
+      this.props.getData();  
     })
     .catch((err) => {
       return err.response.data;
