@@ -2,14 +2,12 @@ import ToolNavbar from "./components/ToolNavbar";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import Search from "./components/Search";
 // import { Route, Redirect } from 'react-router-dom';
 import Profile from "./pages/Profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EditPlace from "./components/EditPlace";
 import MapHomepage from "./components/MapHomepage";
 import "./components/MapBox.css";
-import Home from "./components/Home";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
 import PlaceDetails from "./components/PlaceDetails";
@@ -108,15 +106,14 @@ class App extends React.Component {
           path="/"
           render={(props) => (
             <div className="searchBar">
-              <div className="searchBar-inner">
-                <Search />
-                <Slider className="sliderComponent slide" />
-              </div>
+              
+
+              <Slider className="sliderComponent slide" />
+              
               <MapHomepage  className="mapBoxHome" handleMapChange={this.handleMapChange}  user={this.state.user} />
             </div>
           )}
         />
-        <Route exact path="/home" render={(props) => <Home />} />
       </div>
     );
   }
