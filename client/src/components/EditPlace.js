@@ -159,7 +159,9 @@ updateLikes = (like) => {
 
     return (
       <div className="Form">
+       <div className="img-conpatiner">
         <img className="profileimg" src={this.state.userPhoto} />
+        </div>  
         <form
           encType="multipart/form-data"
           onSubmit={this.handleSubmitUserProfile}

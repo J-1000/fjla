@@ -109,7 +109,6 @@ class App extends React.Component {
           render={(props) => (
             <div className="searchBar">
               <div className="searchBar-inner">
-                <Search />
                 <Slider className="sliderComponent slide" />
               </div>
               <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
