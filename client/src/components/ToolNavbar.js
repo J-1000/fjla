@@ -1,7 +1,8 @@
 import React from "react";
 import { Navbar, Nav } from 'react-bootstrap';
 import {logout} from '../pages/auth/auth'
-
+import './ToolNavbar.css'
+import logo from "../images/LOGOMYTENT.png"
 const handleLogout = props => {
   console.log(props)
   logout().then(() => {
@@ -13,15 +14,15 @@ const handleLogout = props => {
 function ToolNavbar (props) {
   console.log(props.user);
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Navbar.Brand href="/">MyTent</Navbar.Brand>
-    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar collapseOnSelect expand="lg"  className="Navbar" >
+    <Navbar.Brand href="/" ><img src={logo} className="Logo" /></Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav"  />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="mr-auto">
         {/* <Nav.Link href="#features">Features</Nav.Link>
         <Nav.Link href="#pricing">Pricing</Nav.Link> */}
       </Nav>
-      <Nav>
+      <Nav >
       {props.user ? (
         <>
         <h4 style={{ color: '0000' }}>Welcome {props.user.username} </h4>
