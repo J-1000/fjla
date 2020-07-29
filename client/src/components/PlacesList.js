@@ -36,6 +36,9 @@ class PlacesList extends Component {
 
   handleLike = id => {
     console.log("like", id)
+    setTimeout(function () {
+      alert("This place is added to your favorites list");
+    }, 500);
     axios
     .put(`/api/places/like/${id}`)  
     .then((response) => {

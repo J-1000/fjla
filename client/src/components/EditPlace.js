@@ -122,11 +122,20 @@ class EditPlace extends Component {
     }
     // console.log(newPlace)
     console.log("this is the handle Submit", this.handleSubmit)
+    setTimeout(function () {
+      alert("You successfully created a new place!");
+    }, 500);
     axios
       .post("/api/places/new", newPlace)
       .then((response) => {
         console.log(response.data);
         this.props.getData();
+      })
+      .then((response) => {
+        console.log("blabla", this.setState)
+        this.setState({
+          input: "",
+        });
       })
       .catch((err) => {
         return err.response.data;
@@ -204,6 +213,7 @@ class EditPlace extends Component {
             value={this.state.title}
             onChange={this.handleChange}
           />
+           
 
           <label htmlFor="description"> Description: </label>
           <input
