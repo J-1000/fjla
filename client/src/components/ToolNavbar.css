@@ -8,3 +8,22 @@
   width: auto;
   height: 10vh;
 }
+.welcomUserTag {
+  display: center;
+
+}
+
+.navbarItems {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+h5 {
+  padding-top: 8px;
+  color: red;
+  opacity: 90%;
+}

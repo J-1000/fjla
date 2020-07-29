@@ -12,22 +12,14 @@
     transform: rotate(360deg);
   }
 }
-
-.searchBar { 
+.homePage {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%; 
-  margin-top: 80px;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 }
-
-.searchBar-inner { 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .inputProfil{
   border-radius: 30px;
   background-color: white;
@@ -41,10 +33,9 @@
  /* Slider */
 
  .slide{ 
-   display: flex;
-   margin-top: 100px;
-   width: 1000px;
-   height: 700px;
+  
+   margin: 90px;
+   width: 80vw;
 
  }
 
@@ -70,4 +61,14 @@
    height: auto;
    
  }
+.mapBoxHome {
+  margin: 200px;
+  padding: 50px;
 
+}
+
+.mapContainer {
+  margin: 90px;
+   width: 80vw;
+
+}
