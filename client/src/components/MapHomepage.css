@@ -10,8 +10,10 @@
    top: 0;
    left: 0;
    margin: 12px;
-   background-color: #33cfff;
-   color: white;
+   background: rgb(251,63,77);
+  background: linear-gradient(90deg, rgba(251,63,77,1) 0%, rgba(252,185,70,1) 32%);
+  opacity: 80%;
+  border-radius: 20px;
    z-index: 1 !important;
    padding: 6px;
    font-weight: bold;
@@ -33,3 +35,4 @@
      cursor: pointer;
      padding: 0;
      }
+

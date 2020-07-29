@@ -22,10 +22,10 @@ function ToolNavbar (props) {
         {/* <Nav.Link href="#features">Features</Nav.Link>
         <Nav.Link href="#pricing">Pricing</Nav.Link> */}
       </Nav>
-      <Nav >
+      <Nav className="navbarItems" >
       {props.user ? (
         <>
-        <h4 style={{ color: '0000' }}>Welcome {props.user.username} </h4>
+        <h5 className= "welcomUserTag" style={{ color: '0000' }}>Welcome {props.user.username} </h5>
         <Nav.Link href="/myprofile">Profil</Nav.Link>
         <Nav.Link href="/favorites">Favorites</Nav.Link>
         <Nav.Link href="/allPlaces">See all places</Nav.Link>

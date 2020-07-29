@@ -111,8 +111,9 @@ class App extends React.Component {
           exact
           path="/"
           render={(props) => (
-            <div className="searchBar">
-              <Slider className="sliderComponent slide" />
+            <div className="homePage">
+              <Slider className="slider" />
+              <br></br>
               <MapHomepage
                 className="mapBoxHome"
                 handleMapChange={this.handleMapChange}
