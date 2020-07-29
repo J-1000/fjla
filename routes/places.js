@@ -18,7 +18,7 @@ router.get('/details/:placeId', (req, res) => {
 
 router.get('/userPlaces', (req, res) => {
   console.log(req.user._id, "ID")
-  Place.find({userId: req.user._id}).then(userPlaces => {
+  Place.find({userId: req.user._id}).populate("userId").then(userPlaces => {
     console.log(userPlaces)
     res.json(userPlaces)
   }).catch(err => console.log(err))
@@ -30,8 +30,8 @@ router.get('/userPlaces', (req, res) => {
   const imgPath=req.body.photo;
   
   Place.create({name: title, description, imgPath, userId: req.user._id, latitude, longitude}).then(newPlace => {
-    console.log(newPlace, "newPlace")
-    res.json(newPlace)
+    
+      res.json(newPlace)
   }).catch(err => console.log(err))
 }); 
 

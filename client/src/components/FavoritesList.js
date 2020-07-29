@@ -22,6 +22,7 @@ class FavoritesList extends Component {
     if(!this.props.places) return <div> empty </div>
     return (
       <div>
+        <Link to={`/`}><p>Home</p></Link>
         {this.props.places.map(place => {
           return (
             <div key={place._id}>
