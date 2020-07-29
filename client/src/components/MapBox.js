@@ -6,7 +6,7 @@ import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Search from "./Search";
-import PlacesList from "./PlaceDetails";
+import PlacesList from "./PlacesList";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiZXJ0ZWxzaW0iLCJhIjoiY2tjenh5NzFjMG9iNTJ0b3V4emM4azN4cSJ9.ND9UOA3cfWrFtJv2gjojPw";
 
