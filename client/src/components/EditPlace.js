@@ -3,6 +3,8 @@ import axios from 'axios';
 import mapboxgl from "mapbox-gl"
 import MapBox from "./MapBox"
 import {Link} from "react-router-dom";
+import './EditPlace.css'
+
 
 class EditPlace extends Component {
   state = {
@@ -216,7 +218,7 @@ class EditPlace extends Component {
           ) : <p> Image uploaded! </p>}
 
           <br></br>
-          <MapBox className="mapBoxHome" handleMapChange={this.handleMapChange} />
+          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} user={this.props.user}/>
           <br></br>
 
           {/* {this.state.handleSubmit ? (

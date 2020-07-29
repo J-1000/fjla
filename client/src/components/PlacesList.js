@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import { Button, Card, Container, Col, Row } from 'react-bootstrap';
+import './PlacesList.css'
 
 class PlacesList extends Component {
   // state= {
@@ -58,20 +60,21 @@ class PlacesList extends Component {
   render() {
     console.log(this.props.places, "PLACES")
     return (
-      <div>
+      <div className="cardContainer">
       {this.props.places.map(place => {
-        return (
-          <div key={place._id}>
-          <img className="myPlaces" src={place.imgPath} />
-          <Link to={`/place/${place._id}`}><p>{place.name}</p></Link>
-          <p> Place created by {place.userId.username}</p>
-          {/* <img className="profileimg" src={place.imgPath} /> */}
-          <p> {place.description} </p>
-        <p>{}</p>
+        return (      
+         <div className="cardContainer">
+          <Card key={place._id} className="card">
+          <Card.Img variant="top" src={place.imgPath} className="myPlaces"  />
+          <Card.Body>
+          <Card.Title><Link to={`/place/${place._id}`}><p>{place.name}</p></Link></Card.Title>
+          <Card.Text><p> Place created by {place.userId.username}</p></Card.Text>
+          <Card.Text><p> {place.description} </p></Card.Text>
           <p>Likes: {place.likes} </p> 
-          <button type="like" onClick= {() => this.handleLike(place._id)}> Like </button>
-          <br></br>
-          <button type="delete" onClick= {() => this.handleDelete(place._id)}> Delete Place </button>
+          <Button className="cardButton" onClick= {() => this.handleLike(place._id)} type="like" variant="primary">Like</Button>
+          <Button className="cardButton" type="delete" onClick= {() => this.handleDelete(place._id)} variant="primary"> Delete Place </Button>
+          </Card.Body>
+          </Card>
           </div>
         )
       })}

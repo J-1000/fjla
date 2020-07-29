@@ -7,7 +7,7 @@ import Search from "./components/Search";
 import Profile from "./pages/Profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EditPlace from "./components/EditPlace";
-import MapBox from "./components/MapBox";
+import MapHomepage from "./components/MapHomepage";
 import "./components/MapBox.css";
 import Home from "./components/Home";
 import Signup from "./components/SignUp";
@@ -112,7 +112,7 @@ class App extends React.Component {
                 <Search />
                 <Slider className="sliderComponent slide" />
               </div>
-              <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
+              <MapHomepage  className="mapBoxHome" handleMapChange={this.handleMapChange}  user={this.state.user} />
             </div>
           )}
         />
