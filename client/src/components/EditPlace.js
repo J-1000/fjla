@@ -204,7 +204,7 @@ updateLikes = (like) => {
           <input type="file" name="photo" onChange={this.handleFileUpload}></input>
 
           <br></br>
-          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
+          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} user={this.props.user}/>
           <br></br>
           {this.state.uploadOn2 ? (
             <button disabled type="submit">

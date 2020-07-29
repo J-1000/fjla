@@ -112,7 +112,7 @@ class App extends React.Component {
                 <Search />
                 <Slider className="sliderComponent slide" />
               </div>
-              <MapHomepage  className="mapBoxHome" handleMapChange={this.handleMapChange} />
+              <MapHomepage  className="mapBoxHome" handleMapChange={this.handleMapChange}  user={this.state.user} />
             </div>
           )}
         />

@@ -87,10 +87,11 @@ export default class MapHomepage extends Component {
           .setLngLat([place.longitude, place.latitude])
           .setPopup(
             new mapboxgl.Popup().setHTML(
-              `<p><b>${place.name}</b></p><img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="/place/${place._id}">See Details</a>`
+              `<p><b>${place.name}</b></p><img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><p>created by ${this.props.user.username}</p><a href="/place/${place._id}">See Details</a>`
             )
           )
           .addTo(map);
+          console.log(this.props.user.username)
       });
     });
   }
