@@ -70,7 +70,6 @@ class PlacesList extends Component {
           <Card.Title><Link to={`/place/${place._id}`}><p>{place.name}</p></Link></Card.Title>
           <Card.Text><p> Place created by {place.userId.username}</p></Card.Text>
           <Card.Text><p> {place.description} </p></Card.Text>
-          <p>Likes: {place.likes} </p> 
           <Button className="cardButton" onClick= {() => this.handleLike(place._id)} type="like" variant="primary">Like</Button>
           <Button className="cardButton" type="delete" onClick= {() => this.handleDelete(place._id)} variant="primary"> Delete Place </Button>
           </Card.Body>

@@ -236,8 +236,6 @@ class EditPlace extends Component {
               <button type="submit"> Add a Place </button>
             )}
         </form>
-        <h1> All my created places </h1>
-        List with all the places I created.
       </div>
     );
   }
