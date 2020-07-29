@@ -62,3 +62,12 @@
  .myPlaces{
   width: 300px;
 }
+ .homeApp {
+   /*background-color: brown;*/
+   background-image: url("./images/IMG_9232.JPG");
+   background-size: cover;
+   width: 100vw;
+   height: auto;
+   
+ }
+

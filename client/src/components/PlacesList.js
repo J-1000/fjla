@@ -58,6 +58,7 @@ class PlacesList extends Component {
 
 
   render() {
+    console.log(this.props.places, "PLACES")
     return (
       <div className="cardContainer">
       {this.props.places.map(place => {
@@ -67,6 +68,7 @@ class PlacesList extends Component {
           <Card.Img variant="top" src={place.imgPath} className="myPlaces"  />
           <Card.Body>
           <Card.Title><Link to={`/place/${place._id}`}><p>{place.name}</p></Link></Card.Title>
+          <Card.Text><p> Place created by {place.userId.username}</p></Card.Text>
           <Card.Text><p> {place.description} </p></Card.Text>
           <p>Likes: {place.likes} </p> 
           <Button className="cardButton" onClick= {() => this.handleLike(place._id)} type="like" variant="primary">Like</Button>

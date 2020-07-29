@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import mapboxgl from "mapbox-gl"
 import MapBox from "./MapBox"
+import {Link} from "react-router-dom";
 import './EditPlace.css'
 
 
@@ -21,15 +22,15 @@ class EditPlace extends Component {
 
   }
 
-// in edit list likes updaten via setState 
-// prop in places list übergeben mit Referenz auf update likes funktion
-// in placesList onclick triggered funktion aus props
+  // in edit list likes updaten via setState 
+  // prop in places list übergeben mit Referenz auf update likes funktion
+  // in placesList onclick triggered funktion aus props
 
-updateLikes = (like) => {
-  this.setState({
-    likes: this.state.likes+like
-  })
-}
+  updateLikes = (like) => {
+    this.setState({
+      likes: this.state.likes + like
+    })
+  }
 
 
 
@@ -71,7 +72,10 @@ updateLikes = (like) => {
     const uploadData = new FormData();
     uploadData.append("imagePath", event.target.files[0]);
 
-    this.setState({ uploadOn2: true });
+    this.setState({
+      uploadOn2: true
+
+    });
 
     axios
       .post("/api/places/uploadImage", uploadData)
@@ -101,14 +105,14 @@ updateLikes = (like) => {
           userPhotoURL: response.data,
         });
       })
-    .catch(err => console.log("Error while uploading the file", err)) 
-  } 
- 
+      .catch(err => console.log("Error while uploading the file", err))
+  }
+
 
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("banana")
-    const { title, description,photo, latitude, longitude } = this.state;
+    const { title, description, photo, latitude, longitude } = this.state;
     const newPlace = {
       title,
       description,
@@ -117,15 +121,16 @@ updateLikes = (like) => {
       longitude
     }
     // console.log(newPlace)
+    console.log("this is the handle Submit", this.handleSubmit)
     axios
-    .post("/api/places/new", newPlace)
-    .then((response) => {
-      console.log(response.data);
-      this.props.getData();  
-    })
-    .catch((err) => {
-      return err.response.data;
-    });
+      .post("/api/places/new", newPlace)
+      .then((response) => {
+        console.log(response.data);
+        this.props.getData();
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
   }
 
   handleSubmitUserProfile = (event) => {
@@ -151,7 +156,7 @@ updateLikes = (like) => {
     }
   }
 
-  
+
 
   render() {
     console.log(this.state);
@@ -160,6 +165,7 @@ updateLikes = (like) => {
     return (
       <div className="Form">
        <div className="img-conpatiner">
+        <Link to={`/favorites`}><p>My Favorites </p></Link>
         <img className="profileimg" src={this.state.userPhoto} />
         </div>  
         <form
@@ -180,11 +186,16 @@ updateLikes = (like) => {
               Add a your profile picture{" "}
             </button>
           ) : (
-            <button type="submit"> Add a your profile picture </button>
-          )}
+              <button type="submit"> Add a your profile picture </button>
+            )}
         </form>
         <h2> Add a new place for Camping!</h2>
         <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
+            
+          {this.handleSubmit.state ? (
+            <p> New place added. </p>
+          ) : <p> Bratan Test! </p>}
+
           <label htmlFor="title"> Title: </label>
           <input
             type="text"
@@ -202,20 +213,28 @@ updateLikes = (like) => {
             value={this.state.description}
             onChange={this.handleChange}
           />
-          
+
           <input type="file" name="photo" onChange={this.handleFileUpload}></input>
+          {this.state.uploadOn2 ? (
+            <p></p>
+          ) : <p> Image uploaded! </p>}
 
           <br></br>
-          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
+          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} user={this.props.user}/>
           <br></br>
+
+          {/* {this.state.handleSubmit ? (
+            <p></p> 
+          ) : <p> New place added! </p>} */}
+
           {this.state.uploadOn2 ? (
             <button disabled type="submit">
               {" "}
               Add a Place{" "}
             </button>
           ) : (
-            <button type="submit"> Add a Place </button>
-          )}
+              <button type="submit"> Add a Place </button>
+            )}
         </form>
         <h1> All my created places </h1>
         List with all the places I created.
