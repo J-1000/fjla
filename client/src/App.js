@@ -7,12 +7,12 @@ import Search from "./components/Search";
 import Profile from "./pages/Profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EditPlace from "./components/EditPlace";
-import MapBox from "./components/MapBox";
+import MapHomepage from "./components/MapHomepage";
 import "./components/MapBox.css";
 import Home from "./components/Home";
 import Signup from "./components/SignUp";
 import Login from "./components/Login";
-import PlaceDetails from "./components/PlaceDetails/PlaceDetails";
+import PlaceDetails from "./components/PlaceDetails";
 // import Projects from './components/Projects';
 //import Navbar from './components/Navbar';
 //import ProjectDetails from './components/ProjectDetails';
@@ -112,7 +112,7 @@ class App extends React.Component {
                 <Search />
                 <Slider className="sliderComponent slide" />
               </div>
-              <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} />
+              <MapHomepage  className="mapBoxHome" handleMapChange={this.handleMapChange} />
             </div>
           )}
         />
