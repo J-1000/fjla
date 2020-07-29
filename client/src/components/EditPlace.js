@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import mapboxgl from "mapbox-gl"
 import MapBox from "./MapBox"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './EditPlace.css'
 
 
@@ -130,12 +130,13 @@ class EditPlace extends Component {
       .then((response) => {
         console.log(response.data);
         this.props.getData();
-      })
-      .then((response) => {
-        console.log("blabla", this.setState)
         this.setState({
-          input: "",
-        });
+          title: "",
+          description: "",
+          photo: "",
+          latitude: "",
+          longitude:""
+        })
       })
       .catch((err) => {
         return err.response.data;
@@ -173,10 +174,10 @@ class EditPlace extends Component {
 
     return (
       <div className="Form">
-       <div className="img-conpatiner">
-        <Link to={`/favorites`}><p>My Favorites </p></Link>
-        <img className="profileimg" src={this.state.userPhoto} />
-        </div>  
+        <div className="img-conpatiner">
+          <Link to={`/favorites`}><p>My Favorites </p></Link>
+          <img className="profileimg" src={this.state.userPhoto} />
+        </div>
         <form
           encType="multipart/form-data"
           onSubmit={this.handleSubmitUserProfile}
@@ -200,7 +201,7 @@ class EditPlace extends Component {
         </form>
         <h2> Add a new place for Camping!</h2>
         <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
-            
+
           {this.handleSubmit.state ? (
             <p> New place added. </p>
           ) : <p> Bratan Test! </p>}
@@ -213,7 +214,7 @@ class EditPlace extends Component {
             value={this.state.title}
             onChange={this.handleChange}
           />
-           
+
 
           <label htmlFor="description"> Description: </label>
           <input
@@ -230,7 +231,7 @@ class EditPlace extends Component {
           ) : <p> Image uploaded! </p>}
 
           <br></br>
-          <MapBox  className="mapBoxHome" handleMapChange={this.handleMapChange} user={this.props.user}/>
+          <MapBox className="mapBoxHome" handleMapChange={this.handleMapChange} user={this.props.user} />
           <br></br>
 
           {/* {this.state.handleSubmit ? (
