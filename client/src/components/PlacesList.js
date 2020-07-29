@@ -37,7 +37,7 @@ class PlacesList extends Component {
   handleLike = id => {
     console.log("like", id)
     axios
-    .post(`/api/places/like/${id}`) 
+    .put(`/api/places/like/${id}`)  
     .then((response) => {
       console.log(response.data);
       this.props.getData();
@@ -47,26 +47,7 @@ class PlacesList extends Component {
     });
   }
 
-  handleDislike = id => {
-    console.log("like", id)
-    // wenn likes in PlacesDetails ist
-    // if ( likes > 0 ) {
-    //   axios
-    // .post(`/api/places/dislike/${id}`) 
-    // .then((response) => {
-    //   console.log(response.data);
-    //   this.props.getData();
-    // })
-    axios
-    .post(`/api/places/dislike/${id}`) 
-    .then((response) => {
-      console.log(response.data);
-      this.props.getData();
-    })
-    .catch((err) => {
-      return err.response.data;
-    });
-    }
+  
     
 
   componentDidUpdate(prevProps, _) {
@@ -89,7 +70,6 @@ class PlacesList extends Component {
           <Card.Text><p> {place.description} </p></Card.Text>
           <p>Likes: {place.likes} </p> 
           <Button className="cardButton" onClick= {() => this.handleLike(place._id)} type="like" variant="primary">Like</Button>
-          <Button className="cardButton" type="like" onClick= {() => this.handleDislike(place._id)} variant="primary"> Dislike </Button>
           <Button className="cardButton" type="delete" onClick= {() => this.handleDelete(place._id)} variant="primary"> Delete Place </Button>
           </Card.Body>
           </Card>

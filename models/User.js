@@ -5,7 +5,13 @@ const userSchema = new Schema(
   {
     username: String,
     password: String,
-    photo: String
+    photo: String,
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref:'Place'
+      }
+    ]
   },
   {
     timestamps: {

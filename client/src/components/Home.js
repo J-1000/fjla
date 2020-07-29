@@ -2,7 +2,6 @@ import React from "react";
 import ToolNavbar from "./ToolNavbar";
 import Search from "./Search"
 import MapBox from "./MapBox"
-import SearchableMap from  './SearchableMap'
 import "./Home.css"
 
 

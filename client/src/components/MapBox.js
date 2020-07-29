@@ -3,16 +3,18 @@ import mapboxgl from "mapbox-gl";
 import axios from "axios";
 import "./MapBox.css";
 import MapGL, { NavigationControl, Marker, Popup } from "react-map-gl";
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import Search from "./Search";
-mapboxgl.accessToken = 'pk.eyJ1IjoiZXJ0ZWxzaW0iLCJhIjoiY2tjenh5NzFjMG9iNTJ0b3V4emM4azN4cSJ9.ND9UOA3cfWrFtJv2gjojPw';
+import PlacesList from "./PlacesList";
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiZXJ0ZWxzaW0iLCJhIjoiY2tjenh5NzFjMG9iNTJ0b3V4emM4azN4cSJ9.ND9UOA3cfWrFtJv2gjojPw";
 
 //var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
-  mapboxgl: mapboxgl
+  mapboxgl: mapboxgl,
 });
 
 export default class MapBox extends Component {
@@ -25,9 +27,9 @@ export default class MapBox extends Component {
         zoom: 8,
       },
       places: [],
+      editMap: true,
     };
   }
-
 
   // Fake Database to be replaced by data from our database
   loadFakeplacesfromFakeDB(place) {
@@ -47,7 +49,7 @@ export default class MapBox extends Component {
       .get("/api/places")
       .then((response) => {
         console.log(response, "response");
-        this.setState({places: response.data});
+        this.setState({ places: response.data });
       })
       .catch((err) => {
         console.log(err);
@@ -59,10 +61,10 @@ export default class MapBox extends Component {
       zoom: this.state.viewport.zoom,
     });
     //sets one marker specific coordinates:
-    var marker = new mapboxgl.Marker()
-      .setLngLat([13.3509, 52.5113])
-      .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
-      .addTo(map);
+    //var marker = new mapboxgl.Marker()
+//.setLngLat([13.3509, 52.5113])
+//.setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+      //.addTo(map);
 
     map.on("move", () => {
       this.setState({
@@ -72,10 +74,13 @@ export default class MapBox extends Component {
       });
     });
     //sets marker where I click on the map:
-    map.on("click", (e) => {
+   
+  
+    map.on('click', (e) => {
+     
       let addPlaceMarker = new mapboxgl.Marker()
         .setLngLat([e.lngLat.lng, e.lngLat.lat])
-        .setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
+        //.setPopup(new mapboxgl.Popup().setHTML("<h1>Zeltplatz Nummer 1</h1>"))
         .addTo(map);
       // The event object (e) contains information like the
       // coordinates of the point on the map that was clicked.
@@ -84,9 +89,12 @@ export default class MapBox extends Component {
       console.log(e.lngLat.lat);
       console.log(e.lngLat.lng);
       console.log(e.lngLat);
-      console.log(this.props)
-      this.props.handleMapChange(e.lngLat.lng, e.lngLat.lat)
-    });
+      console.log(this.props);
+      this.props.handleMapChange(e.lngLat.lng, e.lngLat.lat);
+      setInterval(function(){addPlaceMarker.remove()},2000);
+      setTimeout(function(){alert("Marker of location is set and saved.")},500);
+      })
+    
     // shows the userlocation
     map.addControl(
       new mapboxgl.GeolocateControl({
@@ -95,82 +103,63 @@ export default class MapBox extends Component {
         },
         trackUserLocation: true,
       })
-    );
+    )
     map.addControl(
       new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
       })
-      );
+    );
     // loads the places fom the fakeplacesDB method on load
     map.on("load", () => {
-      this.state.places.forEach(place => {
-        new mapboxgl.Marker()
-          .setLngLat([place.longitude, place.latitude])
-          .addTo(map);
-      })
-    });
-    
-    geocoder.addTo('#geocoder-container');
-    
+      this.state.places.forEach((place) => {
+        var el = document.createElement("div");
+        el.className = "marker";
+        //let bckgImg = place.imgPath
+        el.style.backgroundImage = `url(${place.imgPath})`;
+        console.log("this is place.imgPath:",place.imgPath);
+        el.style.width = "40px";
+        el.style.height = "40px";
+        //el.addEventListener('click', () => 
+   //{ 
+      //alert("Marker Clicked.");
+     // map.off("click")
+   //}
+//); 
+        
+        new mapboxgl.Marker(el)
+        .setLngLat([place.longitude, place.latitude])
+        .setPopup(new mapboxgl.Popup().setHTML( `<p><b>${place.name}</b></p><img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="/place/${place._id}">See Details</a>`))
+        .addTo(map);
 
-    //  other experiment with geojson, example from the docs
-    var geojson = {
-      type: "FeatureCollection",
-      features: [
-        {
-          type: "Feature",
-          properties: {
-            message: "Berlins geilster Zeltplatz",
-            iconSize: [20, 20],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [13.5083, 52.5444],
-          },
-        },
-        {
-          type: "Feature",
-          properties: {
-            message: "Superschöner Ort zum Zelten",
-            iconSize: [20, 20],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [13.0016, 52.5544],
-          },
-        },
-        {
-          type: "Feature",
-          properties: {
-            message: "Baz",
-            iconSize: [40, 40],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [-63.29223632812499, -18.28151823530889],
-          },
-        },
-      ],
-    };
+        //new mapboxgl.Marker()
+         // .setLngLat([place.longitude, place.latitude])
+          //.setPopup(new mapboxgl.Popup().setHTML( `<img src="${place.imgPath}"  width="60" height="60"/> <p>${place.description}</p><a href="#placeDetail">See Details</a>`))
+          //.addTo(map);
+      });
+    });
+
+    map.getCanvas().style.cursor = "pointer";
+
+    //geocoder.addTo("#geocoder-container");
 
     // add markers to map
-    geojson.features.forEach(function (marker) {
-      // create a DOM element for the marker
-      var el = document.createElement("div");
-      el.className = "marker";
-      el.style.backgroundImage =
-        'url("http://res.cloudinary.com/dvhpj9qdj/image/upload/v1595777135/tent_pictures/IMG_8540.jpg")';
-      el.style.width = marker.properties.iconSize[0] + "px";
-      el.style.height = marker.properties.iconSize[0] + "px";
+    //geojson.features.forEach(function (marker) {
+    // create a DOM element for the marker
+    // var el = document.createElement("div");
+    // el.className = "marker";
+    //el.style.backgroundImage =
+    //   'url("http://res.cloudinary.com/dvhpj9qdj/image/upload/v1595777135/tent_pictures/IMG_8540.jpg")';
+    //el.style.width = marker.properties.iconSize[0] + "px";
+    // el.style.height = marker.properties.iconSize[0] + "px";
 
-      el.addEventListener("click", function () {
-        window.alert(marker.properties.message);
-      });
+    // el.addEventListener("click", function () {
+    //  window.alert(marker.properties.message);
+    // });
 
-      // add marker to map
-      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
-    });
+    // add marker to map
+    //new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
+    //});
   }
   // rest of the first try of geolocating the User
   //setUserLocation = () => {
@@ -198,9 +187,9 @@ export default class MapBox extends Component {
     const { lng, lat, zoom } = this.state;
     return (
       <>
-        <div id='geocoder-container'></div>
+        
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
-        //<div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+
         <div className="sidebarStyle">
           Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
           {this.state.zoom}

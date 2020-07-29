@@ -56,10 +56,9 @@
   height: 70px;
 }
 
-.myPlaces{ 
-  width: 300px;
-}
-
 .profileimg{
- width: 300px;
+  width: 300px;
+ }
+ .myPlaces{
+  width: 300px;
 }
