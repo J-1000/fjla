@@ -1,55 +1,43 @@
 import React from 'react';
+import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import Rating from './Rating'
 
+class Slider extends React.Component {
+  state = {
+    places: null
+  };
 
+  getData() {
+    axios.get("/api/places").then(response => {
+      this.setState({
+        places: response.data
+      })
+    })
+  }
 
+  componentDidMount() {
+    this.getData();
+  }
 
-function Slider (props) {
-
+  render() {
+    if(!this.state.places) return <div>Loading..</div>
 return (
 <Carousel>
-  <Carousel.Item>
-  
-
-    <Carousel.Caption>
-    
-    <p> Hello </p> 
-      
-    </Carousel.Caption>
-
-
-  </Carousel.Item>
-
-
-  <Carousel.Item>
+  {this.state.places.map(place => {
+    return (
+      <Carousel.Item>
     <img
       className="d-block w-100"
-      src="/BER2.jpg"
+      src={place.imgPath}
       alt="Third slide"
     />
-
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
   </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="/BER3.jpg"
-      alt="Third slide"
-    />
-
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-
+    )
+  })}
 </Carousel>
 )
+  }
 }
 
 export default Slider; 

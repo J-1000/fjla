@@ -164,8 +164,10 @@ class EditPlace extends Component {
 
     return (
       <div className="Form">
+       <div className="img-conpatiner">
         <Link to={`/favorites`}><p>My Favorites </p></Link>
         <img className="profileimg" src={this.state.userPhoto} />
+        </div>  
         <form
           encType="multipart/form-data"
           onSubmit={this.handleSubmitUserProfile}
