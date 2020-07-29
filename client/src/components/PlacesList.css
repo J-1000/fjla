@@ -1,0 +1,19 @@
+
+
+.card{
+  width: 20rem;
+  margin: 10px; 
+}
+
+.cardContainer{
+  display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	align-content: space-around;
+}
+
+.cardButton{
+  margin: 0 2px 0 2px;
+}

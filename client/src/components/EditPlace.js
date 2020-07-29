@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import mapboxgl from "mapbox-gl"
 import MapBox from "./MapBox"
+import './EditPlace.css'
+
 
 class EditPlace extends Component {
   state = {
