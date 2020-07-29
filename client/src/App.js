@@ -19,6 +19,7 @@ import PlaceDetails from "./components/PlaceDetails";
 import Slider from "./components/Slider";
 import Edit from "./pages/Edit";
 import Favorites from "./pages/Favorites";
+import AllPlaces from './pages/AllPlaces'; 
 
 class App extends React.Component {
   state = {
@@ -32,18 +33,15 @@ class App extends React.Component {
     });
   };
 
-
   handleMapChange = (longitude, latitude) => {
-    console.log(longitude, latitude, "handlemapchange")
+    console.log(longitude, latitude, "handlemapchange");
     this.setState({
       longitude: longitude,
-      latitude: latitude
-    })
-  }
-
+      latitude: latitude,
+    });
+  };
 
   render() {
-    
     console.log(this.state.user);
 
     return (
@@ -52,12 +50,16 @@ class App extends React.Component {
           <ToolNavbar user={this.state.user} setUser={this.setUser} />
         </nav>
 
-        <Route 
-        exact 
-        path="/favorites"
-        render={(props) => (
-          <Favorites {...props} setUser={this.setUser} user = {this.state.user} /> 
-        )}
+        <Route
+          exact
+          path="/favorites"
+          render={(props) => (
+            <Favorites
+              {...props}
+              setUser={this.setUser}
+              user={this.state.user}
+            />
+          )}
         />
 
         <Route
@@ -70,10 +72,14 @@ class App extends React.Component {
 
         <Route
           exact
+          path="/allPlaces"
+          component={AllPlaces}
+        />
+
+        <Route
+          exact
           path="/place/:placeId"
-          render={(props) => (
-            <PlaceDetails {...props} user={this.state.user} />
-          )}
+          render={(props) => <PlaceDetails {...props} user={this.state.user} />}
         />
 
         {/* new Route */}
@@ -106,11 +112,12 @@ class App extends React.Component {
           path="/"
           render={(props) => (
             <div className="searchBar">
-              
-
               <Slider className="sliderComponent slide" />
-              
-              <MapHomepage  className="mapBoxHome" handleMapChange={this.handleMapChange}  user={this.state.user} />
+              <MapHomepage
+                className="mapBoxHome"
+                handleMapChange={this.handleMapChange}
+                user={this.state.user}
+              />
             </div>
           )}
         />
