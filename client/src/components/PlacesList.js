@@ -56,6 +56,7 @@ class PlacesList extends Component {
 
 
   render() {
+    console.log(this.props.places, "PLACES")
     return (
       <div>
       {this.props.places.map(place => {
@@ -63,6 +64,7 @@ class PlacesList extends Component {
           <div key={place._id}>
           <img className="myPlaces" src={place.imgPath} />
           <Link to={`/place/${place._id}`}><p>{place.name}</p></Link>
+          <p> Place created by {place.userId.username}</p>
           {/* <img className="profileimg" src={place.imgPath} /> */}
           <p> {place.description} </p>
         <p>{}</p>
