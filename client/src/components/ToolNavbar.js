@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import {logout} from '../pages/auth/auth'
 import './ToolNavbar.css'
 import logo from "../images/LOGOMYTENT.png"
@@ -28,7 +28,9 @@ function ToolNavbar (props) {
         <h4 style={{ color: '0000' }}>Welcome {props.user.username} </h4>
         <Nav.Link href="/myprofile">Profil</Nav.Link>
         <Nav.Link href="/favorites">Favorites</Nav.Link>
+        <Nav.Link href="/allPlaces">See all places</Nav.Link>
         <Nav.Link to='/' onClick={() => handleLogout(props)}>Logout</Nav.Link>
+      
 
         </>
         ) : (
