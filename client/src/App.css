@@ -12,6 +12,7 @@
     transform: rotate(360deg);
   }
 }
+
 .homePage {
   display: flex;
 	flex-direction: column;
@@ -45,7 +46,6 @@
 .navbar{ 
   overflow: hidden;
   height: 70px;
-  z-index: 2;
 }
 
 .profileimg{
@@ -60,6 +60,8 @@
    background-size: cover;
    width: 100vw;
    height: auto;
+   position: absolute;
+   z-index: -1;
  }
 .mapBoxHome {
   margin: 200px;
