@@ -43,6 +43,9 @@
 
  /* Navbar */
 
+.Navbar {
+  opacity: 80% !important;
+}
 
 .navbar{ 
   overflow: hidden;
