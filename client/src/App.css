@@ -43,10 +43,13 @@
 
  /* Navbar */
 
+.Navbar {
+  opacity: 80%;
+}
+
 .navbar{ 
   overflow: hidden;
   height: 70px;
-  opacity: 80%;
 }
 
 .profileimg{
